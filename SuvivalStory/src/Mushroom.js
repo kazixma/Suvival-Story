@@ -53,6 +53,23 @@ var Mushroom = cc.Sprite.extend({
     
 
     },
+
+
+    getRect: function() {
+        return this.getBoundingBoxToWorld();
+    },
+    getMaxX: function() {
+        return cc.rectGetMaxX( this.getRect() );
+    },
+    getMinX: function() {
+        return cc.rectGetMinX( this.getRect() );
+    },
+    getMaxY: function() {
+        return cc.rectGetMaxY( this.getRect() );
+    },
+    getMinY: function() {
+        return cc.rectGetMinY( this.getRect() );
+    },
     start:function(){
 
         this.runAction( this.movingAction );
