@@ -72,7 +72,7 @@ var Character = cc.Sprite.extend({
     attack:function(){
     
     for(i=0;i<2;i++){
-        this.checkIntersect(this.mushroom[i]);
+        this.checkIntersect(this.mushroom[i].getRect());
     }
 
     },
@@ -159,7 +159,7 @@ var Character = cc.Sprite.extend({
     animation.addSpriteFrameWithFile( 'images/Attack/Left/a1.png'  );
     animation.addSpriteFrameWithFile( 'images/Attack/Left/a2.png'  );
     animation.addSpriteFrameWithFile( 'images/Attack/Left/a3.png'  );
-    this.attack();
+    //this.attack();
     animation.addSpriteFrameWithFile( 'images/Attack/Left/a4.png'  );
     animation.setDelayPerUnit( 0.2 );
   
@@ -176,7 +176,7 @@ var Character = cc.Sprite.extend({
     animation.addSpriteFrameWithFile( 'images/Attack/Right/a1.png'  );
     animation.addSpriteFrameWithFile( 'images/Attack/Right/a2.png'  );
     animation.addSpriteFrameWithFile( 'images/Attack/Right/a3.png'  );
-    this.attack();
+    //this.attack();
     animation.addSpriteFrameWithFile( 'images/Attack/Right/a4.png'  );
     animation.setDelayPerUnit( 0.2 );
   

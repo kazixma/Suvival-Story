@@ -27,8 +27,8 @@ var GameLayer = cc.LayerColor.extend({
     this.addChild(this.mushroom[i]);
     
     }
-
     this.character.reMonster(this.mushroom);
+    
     
     
 
@@ -55,6 +55,7 @@ var GameLayer = cc.LayerColor.extend({
          //this.character.createAnimationWalkLeft();
         this.character.start();
         this.click=false;
+
         }
     }
     if(e==cc.KEY.right){
@@ -77,8 +78,9 @@ var GameLayer = cc.LayerColor.extend({
         }
     }
     if(e==cc.KEY.c){
-        
+        this.character.attack();
         if(this.click){
+            this.character.reMonster(this.mushroom);
             if(this.character.direction==1){
             this.character.stop();
              console.log( 'Down: ' + e );
