@@ -4,7 +4,7 @@ var GameLayer = cc.LayerColor.extend({
     this.setPosition( new cc.Point( 0, 0 ) );
     this.mapleground =new BackgroundMaple();    
     this.character = new Character(400,134);
-    this.monster=new Mushroom(300,134);
+    this.mushroom=new Array();
     
     var nummonster=Math.floor(Math.random() * (20 - 5 + 5)) + 5;
 
@@ -17,22 +17,23 @@ var GameLayer = cc.LayerColor.extend({
     this.addChild(this.mapleground);
 
     
-    this.mushroom=new Array();
+    
     for(i=1;i<nummonster;i++){
     var posmonster=Math.floor(Math.random() * (1200 - 1 + 1)) + 1;
     this.mushroom[i]=new Mushroom(posmonster,134);
-    
+    this.mushroom[i].setPosition(cc.p(posmonster,134));
     this.mushroom[i].scheduleUpdate();
     this.addChild(this.mushroom[i]);
+    
     }
     
-    this.addChild(this.monster);
+    
     
 
     this.addChild(this.character );
 
     this.character.scheduleUpdate();
-    this.monster.scheduleUpdate();
+   
 
     this.setKeyboardEnabled( true );
 
