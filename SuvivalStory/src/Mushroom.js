@@ -10,6 +10,7 @@ var Mushroom = cc.Sprite.extend({
         this.speed=1;
         this.direction = 0;
         this.movingAction = this.createAnimationMoveLeft();
+        this.hp=10;
         this.start();
 
     },
@@ -22,14 +23,14 @@ var Mushroom = cc.Sprite.extend({
         this.walk();
         
     }*/
-    // var randomdir=Math.floor(Math.random() * (50 - 1 + 1)) + 1;
-    // if(randomdir==50){
-    //     this.direction=Math.floor(Math.random() * (3 - 1 + 1)) + 1;
-    //     this.walk();
-    //     this.walk();
-    //     this.walk(); 
-	   // this.updatePosition();
-    // }
+    var randomdir=Math.floor(Math.random() * (50 - 1 + 1)) + 1;
+    if(randomdir==50){
+        this.direction=Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+        this.walk();
+        this.walk();
+        this.walk(); 
+	   this.updatePosition();
+    }
 		
 		
     },
@@ -104,7 +105,15 @@ var Mushroom = cc.Sprite.extend({
         
          
         
-    }
+    },
+    createAnimationDie:function(){
+        animation.addSpriteFrameWithFile( 'images/Monster/Mushroom/move/Right/m1.png');
+        animation.addSpriteFrameWithFile( 'images/Monster/Mushroom/move/Right/m2.png');
+        animation.addSpriteFrameWithFile( 'images/Monster/Mushroom/move/Right/m3.png' );
+        animation.setDelayPerUnit( 0.4 );
+        return cc.RepeatForever.create( cc.Animate.create( animation ) );
+        
+    },
    
  
 });

@@ -164,10 +164,10 @@ var Character = cc.Sprite.extend({
      animation.addSpriteFrameWithFile( 'images/Attack/Left/a2-2.png'  );
     
     
-    // animation.addSpriteFrameWithFile( 'images/Attack/Left/a3.png'  );
+     // animation.addSpriteFrameWithFile( 'images/Attack/Left/a3.png'  );
    
-    // animation.addSpriteFrameWithFile( 'images/Attack/Left/a4.png'  );
-    animation.setDelayPerUnit( 0.2 );
+     // animation.addSpriteFrameWithFile( 'images/Attack/Left/a4.png'  );
+    animation.setDelayPerUnit( 0.1 );
     
     
     return cc.RepeatForever.create( cc.Animate.create( animation ) );
