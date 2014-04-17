@@ -1,6 +1,6 @@
 var Character = cc.Sprite.extend({
 
-    ctor: function(x,y) {
+    ctor: function(x,y,GameLayer) {
 
         this._super();
         //this.initWithFile( 'images/stand_r.png' );
@@ -11,7 +11,7 @@ var Character = cc.Sprite.extend({
         this.play=true;
         this.direction = 0;
         this.movingAction = this.createAnimationStandLeft();
-        
+        this.GameLayer=GameLayer;
         this.start();
 
     },
@@ -72,22 +72,26 @@ var Character = cc.Sprite.extend({
     attack:function(){
     
     for(i=0;i<2;i++){
-        this.checkIntersect(this.mushroom[i].getRect());
+        this.checkIntersect(this.mushroom[i].getRect(),i);
+        
     }
 
     },
-    checkIntersect:function(rect){
-   
+    checkIntersect:function(rect,i){
     
-     var intersectionRect = cc.rectIntersectsRect(rect, this.getRect());   
-     console.log(intersectionRect);
-     if(intersectionRect){
+    
+     this.intersectionRect = cc.rectIntersectsRect(rect, this.getRect());   
+     console.log(this.intersectionRect);
+     if(this.intersectionRect){
+       this.GameLayer.removeChild(this.mushroom[i]);
 
         console.log("Attack success");
 
      }
+
     
     },
+     
     createAnimationWalkLeft: function() {
     var animation = new cc.Animation.create();
 
@@ -159,9 +163,9 @@ var Character = cc.Sprite.extend({
     animation.addSpriteFrameWithFile( 'images/Attack/Left/a1.png'  );
     animation.addSpriteFrameWithFile( 'images/Attack/Left/a2.png'  );
     animation.addSpriteFrameWithFile( 'images/Attack/Left/a3.png'  );
-    //this.attack();
+    this.attack();
     animation.addSpriteFrameWithFile( 'images/Attack/Left/a4.png'  );
-    animation.setDelayPerUnit( 0.2 );
+    animation.setDelayPerUnit( 0.05 );
   
     
     return cc.RepeatForever.create( cc.Animate.create( animation ) );
@@ -176,9 +180,10 @@ var Character = cc.Sprite.extend({
     animation.addSpriteFrameWithFile( 'images/Attack/Right/a1.png'  );
     animation.addSpriteFrameWithFile( 'images/Attack/Right/a2.png'  );
     animation.addSpriteFrameWithFile( 'images/Attack/Right/a3.png'  );
-    //this.attack();
+    
+    this.attack();
     animation.addSpriteFrameWithFile( 'images/Attack/Right/a4.png'  );
-    animation.setDelayPerUnit( 0.2 );
+    animation.setDelayPerUnit( 0.05);
   
     
     return cc.RepeatForever.create( cc.Animate.create( animation ) );

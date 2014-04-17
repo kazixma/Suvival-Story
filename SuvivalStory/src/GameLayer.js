@@ -5,7 +5,8 @@ var GameLayer = cc.LayerColor.extend({
     this.mapleground =new BackgroundMaple();    
     
     this.mushroom=new Array();
-    this.character = new Character(400,134);
+   
+    this.character = new Character(400,134,this);
     
    // var nummonster=Math.floor(Math.random() * (20 - 5 + 5)) + 5;
     this.nummonster =2;
@@ -78,7 +79,7 @@ var GameLayer = cc.LayerColor.extend({
         }
     }
     if(e==cc.KEY.c){
-        this.character.attack();
+        
         if(this.click){
             this.character.reMonster(this.mushroom);
             if(this.character.direction==1){
@@ -110,6 +111,7 @@ var GameLayer = cc.LayerColor.extend({
     }
     },
     onKeyUp: function( e ) {
+
     if(e==cc.KEY.left){
         
     this.click=true; 
