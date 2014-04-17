@@ -9,15 +9,16 @@ var GameLayer = cc.LayerColor.extend({
     this.character = new Character(400,134,this);
     
    // var nummonster=Math.floor(Math.random() * (20 - 5 + 5)) + 5;
-    this.nummonster =2;
+    this.nummonster =10;
     this.mapleground.setPosition(new cc.Point(800,400));
 
    // this.character.setPosition( new cc.Point( 400, 500 ) );
     //this.character.speed=5;
     //alert(this.character.speed)
     this.click=true;
+    this.attack=false;
     this.addChild(this.mapleground);
-
+    this.scheduleUpdate();
     
     
     for(i=0;i<this.nummonster;i++){
@@ -40,6 +41,11 @@ var GameLayer = cc.LayerColor.extend({
 
     this.setKeyboardEnabled( true );
 
+    },update:function(){
+    if(this.attack){
+    this.character.attack();
+    }
+
     },
     onKeyDown: function( e ) {
     if ( e == cc.KEY.left) {
@@ -52,8 +58,9 @@ var GameLayer = cc.LayerColor.extend({
         this.character.stop();
         console.log( 'Down: ' + e );
         this.character.movingAction = this.character.createAnimationWalkLeft();
+
         console.log(this.click);
-         //this.character.createAnimationWalkLeft();
+        this.character.createAnimationWalkLeft();
         this.character.start();
         this.click=false;
 
@@ -89,7 +96,7 @@ var GameLayer = cc.LayerColor.extend({
              this.character.movingAction=this.character.createAnimationAttackLeft();
              
              this.character.start();
-             
+             this.attack=true;
              
              
              this.click=false;
@@ -101,7 +108,7 @@ var GameLayer = cc.LayerColor.extend({
              this.character.movingAction=this.character.createAnimationAttackRight();
              
              this.character.start();
-             
+            this.attack=true;
              
               
              this.click=false;
@@ -131,7 +138,7 @@ var GameLayer = cc.LayerColor.extend({
     console.log( 'Up: ' + e );
     }
     if(e==cc.KEY.c){
-        
+        this.attack=false;
         this.click=true;
         this.character.stop();
         if(this.character.direction==2){

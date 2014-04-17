@@ -42,7 +42,7 @@ var Character = cc.Sprite.extend({
     },
 
     getRect: function() {
-        return this.getBoundingBoxToWorld();
+        return this.getBoundingBox();
     },
     getMaxX: function() {
         return cc.rectGetMaxX( this.getRect() );
@@ -71,7 +71,7 @@ var Character = cc.Sprite.extend({
     },
     attack:function(){
     
-    for(i=0;i<2;i++){
+    for(i=0;i<10;i++){
         this.checkIntersect(this.mushroom[i].getRect(),i);
         
     }
@@ -136,7 +136,7 @@ var Character = cc.Sprite.extend({
   
     
     return cc.RepeatForever.create( cc.Animate.create( animation ) );
-        
+     
          
         
     },
@@ -152,7 +152,7 @@ var Character = cc.Sprite.extend({
   
     
     return cc.RepeatForever.create( cc.Animate.create( animation ) );
-        
+       
          
         
     },
@@ -160,13 +160,15 @@ var Character = cc.Sprite.extend({
     var animation = new cc.Animation.create();
 
     //animation.addSpriteFrameWithFile( 'images/playerwalk/p1.png' );
-    animation.addSpriteFrameWithFile( 'images/Attack/Left/a1.png'  );
-    animation.addSpriteFrameWithFile( 'images/Attack/Left/a2.png'  );
-    animation.addSpriteFrameWithFile( 'images/Attack/Left/a3.png'  );
-    this.attack();
-    animation.addSpriteFrameWithFile( 'images/Attack/Left/a4.png'  );
-    animation.setDelayPerUnit( 0.05 );
-  
+     animation.addSpriteFrameWithFile( 'images/Attack/Left/a1-2.png'  );
+     animation.addSpriteFrameWithFile( 'images/Attack/Left/a2-2.png'  );
+    
+    
+    // animation.addSpriteFrameWithFile( 'images/Attack/Left/a3.png'  );
+   
+    // animation.addSpriteFrameWithFile( 'images/Attack/Left/a4.png'  );
+    animation.setDelayPerUnit( 0.2 );
+    
     
     return cc.RepeatForever.create( cc.Animate.create( animation ) );
         
@@ -177,14 +179,14 @@ var Character = cc.Sprite.extend({
     var animation = new cc.Animation.create();
 
     //animation.addSpriteFrameWithFile( 'images/playerwalk/p1.png' );
-    animation.addSpriteFrameWithFile( 'images/Attack/Right/a1.png'  );
-    animation.addSpriteFrameWithFile( 'images/Attack/Right/a2.png'  );
-    animation.addSpriteFrameWithFile( 'images/Attack/Right/a3.png'  );
+     animation.addSpriteFrameWithFile( 'images/Attack/Right/a1-2.png'  );
+     animation.addSpriteFrameWithFile( 'images/Attack/Right/a2-2.png'  );
+    // animation.addSpriteFrameWithFile( 'images/Attack/Right/a3.png'  );
     
-    this.attack();
-    animation.addSpriteFrameWithFile( 'images/Attack/Right/a4.png'  );
-    animation.setDelayPerUnit( 0.05);
-  
+   
+    // animation.addSpriteFrameWithFile( 'images/Attack/Right/a4.png'  );
+    animation.setDelayPerUnit( 0.2);
+     
     
     return cc.RepeatForever.create( cc.Animate.create( animation ) );
         
@@ -196,7 +198,7 @@ var Character = cc.Sprite.extend({
  Character.DIR = {
     LEFT: 1,
     RIGHT: 2,
-    UP: 3,
+    Attack: 3,
     DOWN: 4,
     STILL: 0
 };

@@ -56,7 +56,7 @@ var Mushroom = cc.Sprite.extend({
 
 
     getRect: function() {
-        return this.getBoundingBoxToWorld();
+        return this.getBoundingBox();
     },
     getMaxX: function() {
         return cc.rectGetMaxX( this.getRect() );
