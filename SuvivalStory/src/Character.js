@@ -10,8 +10,9 @@ var Character = cc.Sprite.extend({
         this.speed=1;
         this.play=true;
         this.direction = 0;
-        this.movingAction = this.createAnimationStandLeft();
+        this.movingAction = this.createAnimationStandRight();
         this.GameLayer=GameLayer;
+        
         this.start();
 
     },
@@ -124,35 +125,45 @@ var Character = cc.Sprite.extend({
          
         
     },
-    createAnimationStandLeft: function() {
-    var animation = new cc.Animation.create();
+    // createAnimationStandLeft: function() {
+    // var animation = new cc.Animation.create();
 
-    //animation.addSpriteFrameWithFile( 'images/playerwalk/p1.png' );
-    animation.addSpriteFrameWithFile( 'images/stand/Left/s1.png' );
-    animation.addSpriteFrameWithFile( 'images/stand/Left/s2.png' );
-    animation.addSpriteFrameWithFile( 'images/stand/Left/s3.png' );
-    animation.addSpriteFrameWithFile( 'images/stand/Left/s4.png' );
-    animation.setDelayPerUnit( 0.2 );
+    // //animation.addSpriteFrameWithFile( 'images/playerwalk/p1.png' );
+    // animation.addSpriteFrameWithFile( 'images/stand/Left/s1.png' );
+    // animation.addSpriteFrameWithFile( 'images/stand/Left/s2.png' );
+    // animation.addSpriteFrameWithFile( 'images/stand/Left/s3.png' );
+    // animation.addSpriteFrameWithFile( 'images/stand/Left/s4.png' );
+    // animation.setDelayPerUnit( 0.2 );
   
     
-    return cc.RepeatForever.create( cc.Animate.create( animation ) );
+    // return cc.RepeatForever.create( cc.Animate.create( animation ) );
      
          
         
-    },
+    // },
     createAnimationStandRight: function() {
-    var animation = new cc.Animation.create();
+    //var animation = new cc.Animation.create();
 
     //animation.addSpriteFrameWithFile( 'images/playerwalk/p1.png' );
-    animation.addSpriteFrameWithFile( 'images/stand/Right/s1.png'  );
-    animation.addSpriteFrameWithFile( 'images/stand/Right/s2.png');
-    animation.addSpriteFrameWithFile( 'images/stand/Right/s3.png' );
-    animation.addSpriteFrameWithFile( 'images/stand/Right/s4.png' );
-    animation.setDelayPerUnit( 0.2 );
-  
+    // animation.addSpriteFrameWithFile( 'images/stand/Right/s1.png'  );
+    // animation.addSpriteFrameWithFile( 'images/stand/Right/s2.png');
+    // animation.addSpriteFrameWithFile( 'images/stand/Right/s3.png' );
+    // animation.addSpriteFrameWithFile( 'images/stand/Right/s4.png' );
+    // animation.setDelayPerUnit( 0.2 );
     
-    return cc.RepeatForever.create( cc.Animate.create( animation ) );
-       
+    // return cc.RepeatForever.create( cc.Animate.create( animation ) );
+    this.getSprite();
+     var animFrames = [];
+    for (var i = 0; i <= 4; i++) {
+        var str = "alert_" + i + ".png";
+        var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+        animFrames.push(frame);
+    }
+
+    var animation = cc.Animation.create(animFrames, 0.1);
+
+
+    return cc.RepeatForever.create(cc.Animate.create(animation));  
          
         
     },
@@ -174,6 +185,10 @@ var Character = cc.Sprite.extend({
         
          
         
+    },
+    getSprite:function(){
+        return cc.SpriteFrameCache.getInstance().addSpriteFrames(Jumper_walkplist,Jumper_walk);
+
     },
      createAnimationAttackRight: function() {
     var animation = new cc.Animation.create();
@@ -203,3 +218,5 @@ var Character = cc.Sprite.extend({
     STILL: 0
 };
 
+
+    

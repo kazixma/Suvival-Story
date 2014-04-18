@@ -1,8 +1,9 @@
 var GameLayer = cc.LayerColor.extend({
     init: function() {
-    this._super( new cc.Color4B( 135, 206, 250, 255 ) );
+    this._super( new cc.Color4B( 135, 206, 250, 255 ),3555,1059 );
+
     this.setPosition( new cc.Point( 0, 0 ) );
-    this.mapleground =new BackgroundMaple(800,400);    
+    this.mapleground =new BackgroundMaple(0,400);    
     
     this.mushroom=new Array();
    
@@ -10,7 +11,8 @@ var GameLayer = cc.LayerColor.extend({
     
    // var nummonster=Math.floor(Math.random() * (20 - 5 + 5)) + 5;
     this.nummonster =10;
-    this.mapleground.setPosition(new cc.Point(800,400));
+    this.mapleground.setPosition(new cc.Point(0,400));
+
 
 
    // this.character.setPosition( new cc.Point( 400, 500 ) );
@@ -24,7 +26,7 @@ var GameLayer = cc.LayerColor.extend({
     
     
     for(i=0;i<this.nummonster;i++){
-    var posmonster=Math.floor(Math.random() * (1200 - 1 + 1)) + 1;
+    var posmonster=Math.floor(Math.random() * (3599 - 1 + 1)) + 1;
     this.mushroom[i]=new Mushroom(posmonster,134);
     this.mushroom[i].setPosition(cc.p(posmonster,134));
     this.mushroom[i].scheduleUpdate();
@@ -32,9 +34,10 @@ var GameLayer = cc.LayerColor.extend({
     
     }
     this.character.reMonster(this.mushroom);
-    this.schedule(this.createMonster,10,Infinity,null);
+    //this.schedule(this.createMonster,1,Infinity,null);
     
-    
+    var followAction = cc.Follow.create(this.character, cc.rect(0,0,3555,1059));
+    this.runAction(followAction); 
 
     this.addChild(this.character );
 
@@ -44,22 +47,30 @@ var GameLayer = cc.LayerColor.extend({
     this.setKeyboardEnabled( true );
 
     },
+    // slide:function(){
+    // //var actionTo = cc.MoveBy.create(2, cc.p(300, 0);
+    // //this.startWithTarget(actionTo);
+    
+    // var followAction = cc.Follow.create(this.character, cc.rect(0,0,200,0));
+    // this.mapleground.runAction(followAction);
+
+    // },
     update:function(){
     if(this.attack){
     this.character.attack();}
-    this.checkScene();
+   // this.checkScene();
     //this.schedule(this.createMonster(),10,Infinity,null);
     },
-    checkScene:function(){
-        if(this.character.x<300||this.character.x>900){
-            console.log("slide");
-            this.mapleground.slide();
+    // checkScene:function(){
+    //     if(this.character.x<300||this.character.x>900){
+    //         console.log("slide");
+    //         this.slide();
 
-        }
+    //     }
 
     
 
-    },
+    // },
     createMonster:function(){
     this.monster =new Mushroom(400,200);
     this.monster.setPosition(cc.p(400,200));
