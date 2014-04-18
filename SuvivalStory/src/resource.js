@@ -1,13 +1,13 @@
-var Jumper_walk = 'images/alert.png';
-var Jumper_walkplist = 'images/alert.plist';
+var character_s = 'images/character.png';
+var character_s_plist = 'images/character.plist';
 
 var g_resources = [
     //image
-    {src:Jumper_walk},
+    {src:character_s},
 	
 	
     //plist
-	{src:Jumper_walkplist}
+	{src:character_s_plist}
 	
 	
     //fnt
