@@ -34,12 +34,12 @@ var Character = cc.Sprite.extend({
 		
     },
     walk: function() {
-    console.log("kuy");    
+     
     if(this.direction==1){
-    this.x=this.x-10;
+    this.x=this.x-5;
     }
     if(this.direction==2){
-     this.x=this.x+10;   
+     this.x=this.x+5;   
     }
     
 
@@ -121,7 +121,7 @@ var Character = cc.Sprite.extend({
         animFrames.push(frame);
     }
 
-    var animation = cc.Animation.create(animFrames, 0.1);
+    var animation = cc.Animation.create(animFrames, 0.2);
 
 
     return cc.RepeatForever.create(cc.Animate.create(animation));  
@@ -147,7 +147,7 @@ var Character = cc.Sprite.extend({
         animFrames.push(frame);
     }
 
-    var animation = cc.Animation.create(animFrames, 0.1);
+    var animation = cc.Animation.create(animFrames, 0.2);
 
 
     return cc.RepeatForever.create(cc.Animate.create(animation));  
@@ -190,7 +190,7 @@ var Character = cc.Sprite.extend({
         animFrames.push(frame);
     }
 
-    var animation = cc.Animation.create(animFrames, 0.1);
+    var animation = cc.Animation.create(animFrames, 0.2);
 
 
     return cc.RepeatForever.create(cc.Animate.create(animation));  
@@ -222,7 +222,7 @@ var Character = cc.Sprite.extend({
         animFrames.push(frame);
     }
 
-    var animation = cc.Animation.create(animFrames, 0.1);
+    var animation = cc.Animation.create(animFrames, 0.2);
 
 
     return cc.RepeatForever.create(cc.Animate.create(animation));  
@@ -239,7 +239,7 @@ var Character = cc.Sprite.extend({
         animFrames.push(frame);
     }
 
-    var animation = cc.Animation.create(animFrames, 0.1);
+    var animation = cc.Animation.create(animFrames, 0.07);
 
 
     return cc.RepeatForever.create(cc.Animate.create(animation));    
@@ -254,7 +254,7 @@ var Character = cc.Sprite.extend({
         animFrames.push(frame);
     }
 
-    var animation = cc.Animation.create(animFrames, 0.1);
+    var animation = cc.Animation.create(animFrames, 0.2);
 
 
     return cc.RepeatForever.create(cc.Animate.create(animation));    

@@ -37,8 +37,8 @@ var GameLayer = cc.LayerColor.extend({
     this.character.reMonster(this.mushroom);
     //this.schedule(this.createMonster,1,Infinity,null);
     
-    var followAction = cc.Follow.create(this.character, cc.rect(0,0,3555,1059));
-    this.runAction(followAction); 
+    // var followAction = cc.Follow.create(this.character, cc.rect(0,0,3555,1059));
+    // this.runAction(followAction); 
 
     this.addChild(this.character );
 
@@ -59,6 +59,8 @@ var GameLayer = cc.LayerColor.extend({
     update:function(){
     if(this.attack){
     this.character.attack();}
+    var followAction = cc.Follow.create(this.character, cc.rect(0,0,3555,1059));
+    this.runAction(followAction); 
    // this.checkScene();
     //this.schedule(this.createMonster(),10,Infinity,null);
     },
@@ -242,6 +244,13 @@ var GameLayer = cc.LayerColor.extend({
     }}
     },
     onKeyUp: function( e ) {
+     if(e==cc.KEY.e){
+        this.character.stop();
+        this.character.movingAction=this.character.createAnimationStand();
+        this.change=false;
+        this.character.start();
+
+    } 
     if(this.change==false){    
 
     if(e==cc.KEY.left){
@@ -250,7 +259,7 @@ var GameLayer = cc.LayerColor.extend({
     
     this.character.stop();
     this.character.setFlippedX(false);
-    this.character.movingAction = this.character.createAnimationEvo();
+    this.character.movingAction = this.character.createAnimationStand();
     this.character.start();
     console.log( 'Up: ' + e );
 
@@ -260,7 +269,7 @@ var GameLayer = cc.LayerColor.extend({
     this.click=true;
     this.character.stop();
     this.character.setFlippedX(true);
-    this.character.movingAction = this.character.createAnimationEvo();
+    this.character.movingAction = this.character.createAnimationStand();
     this.character.start();
     console.log( 'Up: ' + e );
     }
@@ -270,11 +279,11 @@ var GameLayer = cc.LayerColor.extend({
         this.character.stop();
         if(this.character.direction==2){
         this.character.setFlippedX(true);
-        this.character.movingAction=this.character.createAnimationEvo();
+        this.character.movingAction=this.character.createAnimationStand();
         }
         if(this.character.direction==1){
         this.character.setFlippedX(false);
-         this.character.movingAction=this.character.createAnimationEvo(); 
+         this.character.movingAction=this.character.createAnimationStand(); 
 
         }
         this.character.start();
