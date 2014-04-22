@@ -4,16 +4,16 @@ var Character = cc.Sprite.extend({
     ctor: function(x,y,GameLayer) {
 
         this._super();
-        //this.initWithFile( 'images/stand_r.png' );
+      //  this.initWithFile( 'images/stand_r.png' );
         var pos =this.getPosition()
         this.x=x;
         this.y=y;
         this.speed=1;
         this.play=true;
         this.direction = 0;
-        this.movingAction = this.createAnimationStand();
+         this.movingAction = this.createAnimationStand();
         this.GameLayer=GameLayer;
-        
+        this.v=4;
         this.start();
 
     },
@@ -28,6 +28,7 @@ var Character = cc.Sprite.extend({
         this.walk();
         
     }*/
+    this.walk()
 	this.updatePosition();
 
 		
@@ -36,10 +37,18 @@ var Character = cc.Sprite.extend({
     walk: function() {
      
     if(this.direction==1){
-    this.x=this.x-5;
+        if(this.GameLayer.walk){
+        this.x=this.x-4;
+    }
+        
+    
     }
     if(this.direction==2){
-     this.x=this.x+5;   
+        if(this.GameLayer.walk){
+        this.x=this.x+4;
+    }
+      
+      
     }
     
 
@@ -185,7 +194,7 @@ var Character = cc.Sprite.extend({
     this.getSprite();
     var animFrames = [];
     for (var i = 0; i <= 4; i++) {
-        var str = "alert_" + i + ".png";
+        var str = "stand2_" + i + ".png";
         var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
         animFrames.push(frame);
     }
@@ -222,7 +231,7 @@ var Character = cc.Sprite.extend({
         animFrames.push(frame);
     }
 
-    var animation = cc.Animation.create(animFrames, 0.2);
+    var animation = cc.Animation.create(animFrames, 0.4);
 
 
     return cc.RepeatForever.create(cc.Animate.create(animation));  

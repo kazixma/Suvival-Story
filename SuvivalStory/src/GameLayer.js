@@ -8,7 +8,7 @@ var GameLayer = cc.LayerColor.extend({
     this.mushroom=new Array();
    
     this.character = new Character(400,134,this);
-    
+    this.walk=false;
    // var nummonster=Math.floor(Math.random() * (20 - 5 + 5)) + 5;
     this.nummonster =10;
     this.mapleground.setPosition(new cc.Point(0,400));
@@ -39,7 +39,8 @@ var GameLayer = cc.LayerColor.extend({
     
     // var followAction = cc.Follow.create(this.character, cc.rect(0,0,3555,1059));
     // this.runAction(followAction); 
-
+    var followAction = cc.Follow.create(this.character, cc.rect(0,0,3555,1059));
+    this.runAction(followAction); 
     this.addChild(this.character );
 
     this.character.scheduleUpdate();
@@ -59,8 +60,7 @@ var GameLayer = cc.LayerColor.extend({
     update:function(){
     if(this.attack){
     this.character.attack();}
-    var followAction = cc.Follow.create(this.character, cc.rect(0,0,3555,1059));
-    this.runAction(followAction); 
+
    // this.checkScene();
     //this.schedule(this.createMonster(),10,Infinity,null);
     },
@@ -102,13 +102,13 @@ var GameLayer = cc.LayerColor.extend({
         
         this.character.direction=1;
         
-        this.character.walk();
+        this.walk=true;
         if(this.click){
         this.character.stop();
         console.log(this.character.x);
         console.log( 'Down: ' + e );
         this.character.setFlippedX(false);
-        this.character.movingAction = this.character.createAnimationWalk();
+       this.character.movingAction = this.character.createAnimationWalk();
     
         console.log(this.click);
        // this.character.createAnimationWalkLeft();
@@ -123,12 +123,12 @@ var GameLayer = cc.LayerColor.extend({
          this.character.direction=2;
          
 
-        this.character.walk();
+        this.walk=true;
         if(this.click){
         this.character.stop();
         console.log( 'Down: ' + e );
         this.character.setFlippedX(true);
-        this.character.movingAction = this.character.createAnimationWalk();
+      this.character.movingAction = this.character.createAnimationWalk();
 
         console.log(this.click);
          //this.character.createAnimationWalkLeft();
@@ -174,16 +174,16 @@ var GameLayer = cc.LayerColor.extend({
         
         this.character.direction=1;
         
-        this.character.walk();
+        this.walk=true;
         if(this.click){
         this.character.stop();
         console.log(this.character.x);
         console.log( 'Down: ' + e );
         this.character.setFlippedX(false);
-        this.character.movingAction = this.character.createAnimationDkWalk();
+       this.character.movingAction = this.character.createAnimationDkWalk();
     
         console.log(this.click);
-       // this.character.createAnimationWalkLeft();
+       //this.character.createAnimationWalkLeft();
         this.character.start();
         this.click=false;
 
@@ -195,15 +195,15 @@ var GameLayer = cc.LayerColor.extend({
          this.character.direction=2;
          
 
-        this.character.walk();
+        this.walk=true;
         if(this.click){
         this.character.stop();
         console.log( 'Down: ' + e );
         this.character.setFlippedX(true);
-        this.character.movingAction = this.character.createAnimationDkWalk();
+       this.character.movingAction = this.character.createAnimationDkWalk();
 
         console.log(this.click);
-         //this.character.createAnimationWalkLeft();
+        //this.character.createAnimationWalkLeft();
         this.character.start();
         this.click=false;
         
@@ -217,7 +217,7 @@ var GameLayer = cc.LayerColor.extend({
             this.character.stop();
              console.log( 'Down: ' + e );
             this.character.setFlippedX(false);
-             this.character.movingAction=this.character.createAnimationDkAttack();
+            this.character.movingAction=this.character.createAnimationDkAttack();
              
              this.character.start();
              this.attack=true;
@@ -256,20 +256,20 @@ var GameLayer = cc.LayerColor.extend({
     if(e==cc.KEY.left){
         
     this.click=true; 
-    
+    this.walk=false;
     this.character.stop();
     this.character.setFlippedX(false);
-    this.character.movingAction = this.character.createAnimationStand();
+   this.character.movingAction = this.character.createAnimationStand();
     this.character.start();
     console.log( 'Up: ' + e );
 
     }
     if(e==cc.KEY.right){
-        
+    this.walk=false;
     this.click=true;
-    this.character.stop();
+   this.character.stop();
     this.character.setFlippedX(true);
-    this.character.movingAction = this.character.createAnimationStand();
+   this.character.movingAction = this.character.createAnimationStand();
     this.character.start();
     console.log( 'Up: ' + e );
     }
@@ -295,16 +295,16 @@ var GameLayer = cc.LayerColor.extend({
     if(e==cc.KEY.left){
         
     this.click=true; 
-    
+    this.walk=false;
     this.character.stop();
     this.character.setFlippedX(false);
-    this.character.movingAction = this.character.createAnimationEvo();
+   this.character.movingAction = this.character.createAnimationEvo();
     this.character.start();
     console.log( 'Up: ' + e );
 
     }
     if(e==cc.KEY.right){
-        
+    this.walk=false;
     this.click=true;
     this.character.stop();
     this.character.setFlippedX(true);
@@ -322,7 +322,7 @@ var GameLayer = cc.LayerColor.extend({
         }
         if(this.character.direction==1){
         this.character.setFlippedX(false);
-         this.character.movingAction=this.character.createAnimationEvo(); 
+        this.character.movingAction=this.character.createAnimationEvo(); 
 
         }
         this.character.start();
