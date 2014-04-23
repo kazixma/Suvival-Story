@@ -29,30 +29,28 @@ var Character = cc.Sprite.extend({
         this.walk();
         
     }*/
-    this.walk()
-	this.updatePosition();
+       this.walk()
+	   this.updatePosition();
 
 		
 		
     },
     walk: function() {
      
-    if(this.direction==1){
-        if(this.GameLayer.walk){
-        this.x=this.x-4;
-    }
+        if(this.direction==1){
+            if(this.GameLayer.walk){
+            this.x=this.x-4;
+         }
         
     
-    }
-    if(this.direction==2){
-        if(this.GameLayer.walk){
-        this.x=this.x+4;
-    }
-      
-      
-    }
+        }
+        if(this.direction==2){
+            if(this.GameLayer.walk){
+            this.x=this.x+4;
+        }
+           
+        }
     
-
     },
 
     getRect: function() {
@@ -72,47 +70,47 @@ var Character = cc.Sprite.extend({
     },
     start:function(){
 
-     this.runAction( this.movingAction );
+        this.runAction( this.movingAction );
     },
     stop:function(){
     
-    this.stopAction( this.movingAction );
+        this.stopAction( this.movingAction );
     
     },
     reMonster:function(monster){
-    this.mushroom=monster;
+        this.mushroom=monster;
     
     },
     attack:function(){
     
-    for(i=0;i<10;i++){
+     for(i=0;i<10;i++){
         this.checkIntersect(this.mushroom[i].getRect(),i);
         
-    }
+        }
 
     },
     checkIntersect:function(rect,i){
     
     
-     this.intersectionRect = cc.rectIntersectsRect(rect, this.getRect());   
-     console.log(this.intersectionRect);
-     if(this.intersectionRect){
-        this.mushroom[i].reBack();
-        this.mushroom[i].stop();
+        this.intersectionRect = cc.rectIntersectsRect(rect, this.getRect());   
+        console.log(this.intersectionRect);
+            if(this.intersectionRect){
+       // this.mushroom[i].reBack();
+            this.mushroom[i].stop();
         //this.mushroom[i].reBack();
 
-        var fadeOut = cc.FadeOut.create(0.4);
+            var fadeOut = cc.FadeOut.create(0.4);
 
-        var sequence2 = cc.Sequence.create(
-            fadeOut,
-            cc.CallFunc.create(function () {
+            var sequence2 = cc.Sequence.create(
+                fadeOut,
+                cc.CallFunc.create(function () {
                 this.mushroom[i].removeFromParent();
             }, this)
-        );
+            );
 
-        this.mushroom[i].runAction(cc.Sequence.create(
+            this.mushroom[i].runAction(cc.Sequence.create(
             this.mushroom[i].createAnimationDie(),sequence2
-        ));
+            ));
 
 
 
@@ -148,17 +146,17 @@ var Character = cc.Sprite.extend({
     // },
     createAnimationEvo:function(){
         this.getSprite();
-    var animFrames = [];
-    for (var i = 0; i <= 14; i++) {
-        var str = "Dalert_" + i + ".png";
-        var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
-        animFrames.push(frame);
-    }
+        var animFrames = [];
+        for (var i = 0; i <= 14; i++) {
+            var str = "Dalert_" + i + ".png";
+            var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+            animFrames.push(frame);
+        }
 
-    var animation = cc.Animation.create(animFrames, 0.2);
+        var animation = cc.Animation.create(animFrames, 0.2);
 
 
-    return cc.RepeatForever.create(cc.Animate.create(animation));  
+        return cc.RepeatForever.create(cc.Animate.create(animation));  
 
     },
     createAnimationWalk: function() {
@@ -173,18 +171,18 @@ var Character = cc.Sprite.extend({
   
     
     // return cc.RepeatForever.create( cc.Animate.create( animation ) );
-    this.getSprite();
-    var animFrames = [];
-    for (var i = 0; i <= 3; i++) {
-        var str = "walk2_" + i + ".png";
-        var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
-        animFrames.push(frame);
-    }
+        this.getSprite();
+        var animFrames = [];
+        for (var i = 0; i <= 3; i++) {
+            var str = "walk2_" + i + ".png";
+            var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+            animFrames.push(frame);
+        }
 
-    var animation = cc.Animation.create(animFrames, 0.2);
+        var animation = cc.Animation.create(animFrames, 0.2);
 
 
-    return cc.RepeatForever.create(cc.Animate.create(animation));  
+        return cc.RepeatForever.create(cc.Animate.create(animation));  
         
          
         
@@ -216,18 +214,18 @@ var Character = cc.Sprite.extend({
     // animation.setDelayPerUnit( 0.2 );
     
     // return cc.RepeatForever.create( cc.Animate.create( animation ) );
-    this.getSprite();
-    var animFrames = [];
-    for (var i = 0; i <= 4; i++) {
-        var str = "stand2_" + i + ".png";
-        var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
-        animFrames.push(frame);
-    }
+        this.getSprite();
+        var animFrames = [];
+        for (var i = 0; i <= 4; i++) {
+            var str = "stand2_" + i + ".png";
+            var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+            animFrames.push(frame);
+        }
 
-    var animation = cc.Animation.create(animFrames, 0.2);
+        var animation = cc.Animation.create(animFrames, 0.2);
 
 
-    return cc.RepeatForever.create(cc.Animate.create(animation));  
+        return cc.RepeatForever.create(cc.Animate.create(animation));  
          
         
     },
@@ -248,50 +246,50 @@ var Character = cc.Sprite.extend({
     
     
     // return cc.RepeatForever.create( cc.Animate.create( animation ) );
-    this.getSprite();
-    var animFrames = [];
-    for (var i = 0; i <= 1; i++) {
-        var str = "stabO1_" + i + ".png";
-        var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
-        animFrames.push(frame);
-    }
+        this.getSprite();
+        var animFrames = [];
+            for (var i = 0; i <= 1; i++) {
+                var str = "stabO1_" + i + ".png";
+                var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+                animFrames.push(frame);
+             }
 
-    var animation = cc.Animation.create(animFrames, 0.4);
+            var animation = cc.Animation.create(animFrames, 0.4);
 
 
-    return cc.RepeatForever.create(cc.Animate.create(animation));  
+            return cc.RepeatForever.create(cc.Animate.create(animation));  
         
          
         
     },
     createAnimationDkAttack: function(){
-      this.getSprite();
-    var animFrames = [];
-    for (var i = 0; i <= 9; i++) {
-        var str = "DKgigaSlasher_" + i + ".png";
-        var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
-        animFrames.push(frame);
-    }
+        this.getSprite();
+        var animFrames = [];
+            for (var i = 0; i <= 9; i++) {
+                var str = "DKgigaSlasher_" + i + ".png";
+                var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+            animFrames.push(frame);
+            }
 
-    var animation = cc.Animation.create(animFrames, 0.07);
+        var animation = cc.Animation.create(animFrames, 0.07);
 
 
-    return cc.RepeatForever.create(cc.Animate.create(animation));    
+        return cc.RepeatForever.create(cc.Animate.create(animation));    
 
     },
     createAnimationDkWalk:function(){
-      this.getSprite();
-    var animFrames = [];
-    for (var i = 0; i <= 7; i++) {
-        var str = "walk_" + i + ".png";
-        var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
-        animFrames.push(frame);
-    }
+        this.getSprite();
+        var animFrames = [];
+        for (var i = 0; i <= 7; i++) {
+            var str = "walk_" + i + ".png";
+            var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+            animFrames.push(frame);
+        }
 
-    var animation = cc.Animation.create(animFrames, 0.2);
+        var animation = cc.Animation.create(animFrames, 0.2);
 
 
-    return cc.RepeatForever.create(cc.Animate.create(animation));    
+        return cc.RepeatForever.create(cc.Animate.create(animation));    
 
     },
     getSprite:function(){

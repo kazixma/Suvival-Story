@@ -24,14 +24,14 @@ var Mushroom = cc.Sprite.extend({
         this.walk();
         
     }*/
-    var randomdir=Math.floor(Math.random() * (50 - 1 + 1)) + 1;
-    if(randomdir==50){
-        this.direction=Math.floor(Math.random() * (3 - 1 + 1)) + 1;
-        this.walk();
-        this.walk();
-        this.walk(); 
-	   this.updatePosition();
-    }
+        var randomdir=Math.floor(Math.random() * (50 - 1 + 1)) + 1;
+        if(randomdir==50){
+            this.direction=Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+            this.walk();
+            this.walk();
+            this.walk(); 
+    	   this.updatePosition();
+        }
 		
 		
     },
@@ -106,48 +106,48 @@ var Mushroom = cc.Sprite.extend({
     },
     createAnimationisHit: function(){
         this.getSprite();
-    var animFrames = [];
-    for (var i = 0; i <= 0; i++) {
-        var str = "hit1_" + 0 + ".png";
-        var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
-        animFrames.push(frame);
-    }
+        var animFrames = [];
+        for (var i = 0; i <= 0; i++) {
+            var str = "hit1_" + 0 + ".png";
+            var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+            animFrames.push(frame);
+        }
 
-    var animation = cc.Animation.create(animFrames, 0.2);
+        var animation = cc.Animation.create(animFrames, 0.5);
 
 
-    return cc.RepeatForever.create(cc.Animate.create(animation)); 
+        return cc.RepeatForever.create(cc.Animate.create(animation)); 
 
     },
     createAnimationMove: function() {
-    this.getSprite();
-    var animFrames = [];
-    for (var i = 0; i <= 2; i++) {
-        var str = "move_" + i + ".png";
-        var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
-        animFrames.push(frame);
-    }
+        this.getSprite();
+        var animFrames = [];
+        for (var i = 0; i <= 2; i++) {
+            var str = "move_" + i + ".png";
+            var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+            animFrames.push(frame);
+        }
 
-    var animation = cc.Animation.create(animFrames, 0.2);
+        var animation = cc.Animation.create(animFrames, 0.2);
 
 
-    return cc.RepeatForever.create(cc.Animate.create(animation));    
-         
+        return cc.Animate.create(animation);    
+             
         
     },
     createAnimationDie:function(){
         this.getSprite();
-    var animFrames = [];
-    for (var i = 0; i <= 2; i++) {
-        var str = "die1_" + i + ".png";
-        var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
-        animFrames.push(frame);
-    }
+        var animFrames = [];
+        for (var i = 0; i <= 2; i++) {
+            var str = "die1_" + i + ".png";
+            var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+            animFrames.push(frame);
+        }
 
-    var animation = cc.Animation.create(animFrames, 0.2);
-    //this.scthis.removeFromParent();
+        var animation = cc.Animation.create(animFrames, 0.2);
+        //this.scthis.removeFromParent();
 
-    return cc.Animate.create(animation);         
+        return cc.Animate.create(animation);         
     },
    
  

@@ -10,11 +10,11 @@ var BackgroundMaple = cc.Sprite.extend({
        
     },
     update:function(){
-    this.updatePostion();
+        this.updatePostion();
     },
     
     updatePostion:function(){
-    this.setPosition( cc.p( this.x, this.y ) );
+        this.setPosition( cc.p( this.x, this.y ) );
     } 
 
 });
