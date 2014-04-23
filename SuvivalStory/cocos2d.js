@@ -16,7 +16,8 @@
 	    'src/Character.js',
         'src/BackgroundMaple.js',
         'src/Mushroom.js',
-        'src/resource.js'     //add your own files in order here
+        'src/resource.js',
+        'src/GameLayer2.js'     //add your own files in order here
         ]
     };
 

@@ -14,6 +14,7 @@ var Character = cc.Sprite.extend({
          this.movingAction = this.createAnimationStand();
         this.GameLayer=GameLayer;
         this.v=4;
+        this.damage=500;
         this.start();
 
     },

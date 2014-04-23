@@ -9,8 +9,9 @@ var Mushroom = cc.Sprite.extend({
         this.y=y;
         this.speed=1;
         this.direction = 0;
-        this.movingAction = this.createAnimationMoveLeft();
-        this.hp=10;
+        this.setFlippedX(false);
+        this.movingAction = this.createAnimationMove();
+        this.hp=1000;
         this.start();
 
     },
@@ -38,13 +39,15 @@ var Mushroom = cc.Sprite.extend({
 
         if(this.direction==1){
             this.stop();
-            this.movingAction = this.createAnimationMoveLeft();
+            this.setFlippedX(false);
+            this.movingAction = this.createAnimationMove();
             this.start();
             this.x=this.x-15;
         }
         if(this.direction==2){
             this.stop();
-            this.movingAction = this.createAnimationMoveRight();
+            this.setFlippedX(true);
+            this.movingAction = this.createAnimationMove();
             this.start(); 
             this.x=this.x+15;   
         }
@@ -53,6 +56,9 @@ var Mushroom = cc.Sprite.extend({
         }
     
 
+    },
+     getSprite:function(){
+        return cc.SpriteFrameCache.getInstance().addSpriteFrames(mushroom_s_plist,mushroom_s);
     },
 
 
@@ -80,29 +86,27 @@ var Mushroom = cc.Sprite.extend({
         this.stopAction( this.movingAction );
     
     },
-    createAnimationMoveLeft: function() {
-        var animation = new cc.Animation.create();
+    isHit: function(){
 
-    //animation.addSpriteFrameWithFile( 'images/playerwalk/p1.png' );
-        animation.addSpriteFrameWithFile( 'images/Monster/Mushroom/move/left/m1.png' );
-        animation.addSpriteFrameWithFile( 'images/Monster/Mushroom/move/left/m2.png' );
-        animation.addSpriteFrameWithFile( 'images/Monster/Mushroom/move/left/m3.png' );
-        animation.setDelayPerUnit( 0.4);
-        return cc.RepeatForever.create( cc.Animate.create( animation ) );
-     	
-     	 
-		
+
     },
-    createAnimationMoveRight: function() {
-        var animation = new cc.Animation.create();
+    createAnimationisHit: function(){
 
-    //animation.addSpriteFrameWithFile( 'images/playerwalk/p1.png' );
-        animation.addSpriteFrameWithFile( 'images/Monster/Mushroom/move/Right/m1.png');
-        animation.addSpriteFrameWithFile( 'images/Monster/Mushroom/move/Right/m2.png');
-        animation.addSpriteFrameWithFile( 'images/Monster/Mushroom/move/Right/m3.png' );
-        animation.setDelayPerUnit( 0.4 );
-        return cc.RepeatForever.create( cc.Animate.create( animation ) );
-        
+
+    },
+    createAnimationMove: function() {
+    this.getSprite();
+    var animFrames = [];
+    for (var i = 0; i <= 2; i++) {
+        var str = "move_" + i + ".png";
+        var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+        animFrames.push(frame);
+    }
+
+    var animation = cc.Animation.create(animFrames, 0.2);
+
+
+    return cc.RepeatForever.create(cc.Animate.create(animation));    
          
         
     },

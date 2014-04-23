@@ -41,9 +41,12 @@ var GameLayer = cc.LayerColor.extend({
     // this.runAction(followAction); 
     var followAction = cc.Follow.create(this.character, cc.rect(0,0,3555,1059));
     this.runAction(followAction); 
+    //  var followAction2 = cc.Follow.create(, cc.rect(0,0,3555,1059));
+    // this.runAction(followAction2); 
     this.addChild(this.character );
 
     this.character.scheduleUpdate();
+   
    
 
     this.setKeyboardEnabled( true );
@@ -341,7 +344,10 @@ var StartScene = cc.Scene.extend({
         this._super();
         var layer = new GameLayer();
         layer.init();
+        var layer2 = new GameLayer2();
+        layer2.init();
         this.addChild( layer );
+        this.addChild( layer2 );
         
     }
 
