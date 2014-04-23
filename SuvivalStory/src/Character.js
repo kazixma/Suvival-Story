@@ -97,8 +97,15 @@ var Character = cc.Sprite.extend({
      this.intersectionRect = cc.rectIntersectsRect(rect, this.getRect());   
      console.log(this.intersectionRect);
      if(this.intersectionRect){
-       this.GameLayer.removeChild(this.mushroom[i]);
-
+        this.mushroom[i].reBack();
+        this.mushroom[i].stop();
+        //this.mushroom[i].reBack();
+        this.mushroom[i].movingAction=this.mushroom[i].createAnimationisHit();
+        this.mushroom[i].start()
+        
+        //this.mushroom[i].start();
+       //var monsterDie=this.GameLayer.removeChild(this.mushroom[i]);
+      // this.schedule(monsterDie,2,Infinity,null);
         console.log("Attack success");
 
      }
