@@ -147,7 +147,7 @@ var Mushroom = cc.Sprite.extend({
     var animation = cc.Animation.create(animFrames, 0.2);
     //this.scthis.removeFromParent();
 
-    return cc.RepeatForever.create(cc.Animate.create(animation));         
+    return cc.Animate.create(animation);         
     },
    
  

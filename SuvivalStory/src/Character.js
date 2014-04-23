@@ -100,8 +100,25 @@ var Character = cc.Sprite.extend({
         this.mushroom[i].reBack();
         this.mushroom[i].stop();
         //this.mushroom[i].reBack();
-        this.mushroom[i].movingAction=this.mushroom[i].createAnimationisHit();
-        this.mushroom[i].start()
+
+        var fadeOut = cc.FadeOut.create(0.4);
+
+        var sequence2 = cc.Sequence.create(
+            fadeOut,
+            cc.CallFunc.create(function () {
+                this.mushroom[i].removeFromParent();
+            }, this)
+        );
+
+        this.mushroom[i].runAction(cc.Sequence.create(
+            this.mushroom[i].createAnimationDie(),sequence2
+        ));
+
+
+
+
+        // this.mushroom[i].movingAction=this.mushroom[i].createAnimationisHit();
+        // this.mushroom[i].start()
         
         //this.mushroom[i].start();
        //var monsterDie=this.GameLayer.removeChild(this.mushroom[i]);
