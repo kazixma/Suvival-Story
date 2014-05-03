@@ -121,25 +121,20 @@ var Character = cc.Sprite.extend({
             // );
             this.mushroom[i].hit=true;
             if(this.mushroom[i].hit){
-                 tempArray=new Array();
                  
-                 tempArray.push(this.mushroom[i].createAnimationisHit());
-                
-                // tempArray.push(this.mushroom[i].reBack());
-                tempArray.push(this.mushroom[i].walk()); 
-             this.mushroom[i].runAction(cc.Sequence.create(tempArray));
                 // this.mushroom[i].runAction(cc.Sequence.create(
                 //  this.mushroom[i].createAnimationisHit(),
                 //  cc.CallFunc.create(function () {
                 //      this.mushroom[i].reBack();
                 //  }, this)
                 //   ));
-               if(this.mushroom[i].rebacked){
+
+              // if(this.mushroom[i].rebacked){
                 //console.log("kyu");
-                //this.mushroom[i].reBack();    
+                this.mushroom[i].isHit();    
                 this.mushroom[i].hit=false;
                 this.mushroom[i].rebacked=false;
-                }
+                //}
             }
             // this.mushroom[i].runAction(cc.Sequence.create(
             // this.mushroom[i].createAnimationisHit(),this.mushroom[i].createAnimationMove();
@@ -148,6 +143,8 @@ var Character = cc.Sprite.extend({
            // this.start();
            // this.mushroom[i].hp=this.mushroom[i].hp-this.damage;
        // this.mushroom[i].reBack();
+               
+
            if(this.mushroom[i].hp<0){
                 if(this.mushroom[i].live){
                     this.mushroom[i].stop();

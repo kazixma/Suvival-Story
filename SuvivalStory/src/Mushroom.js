@@ -66,22 +66,35 @@ var Mushroom = cc.Sprite.extend({
     },
     reBack:function(){
         this.stop();
-        var actionTo = cc.MoveBy.create(this.getMaxX()*0.03, cc.p(this.getMaxX() -0.02, 0));
+        var actionTo = cc.MoveBy.create(0.1, cc.p(15, 0));
          
         if(this.direction==1){
-             actionTo = cc.MoveBy.create(this.getMaxX()*0.03, cc.p(this.getMaxX() -0.02 , 0));
-             this.movingAction=actionTo;
-             this.start();
+             actionTo = cc.MoveBy.create(0.1, cc.p(15 , 0));
+             //this.movingAction=actionTo;
+             //this.start();
             
         }
         if(this.direction==2){
            
-             actionTo = cc.MoveBy.create(this.getMaxX()*0.03, cc.p(this.getMaxX() +0.02 , 0)); 
-             this.movingAction=actionTo;
-             this.start();
+             actionTo = cc.MoveBy.create(0.1, cc.p(15 , 0)); 
+            // this.movingAction=actionTo;
+             //this.start();
         }
         
-        
+        return actionTo;
+
+    },
+    isHit:function(){
+        var sequence2 = cc.Sequence.create(
+                    this.reBack(),
+                    cc.CallFunc.create(function () {
+                    this.walk();
+                     }, this)
+                    );
+
+                     this.runAction(cc.Sequence.create(
+                    this.createAnimationisHit(),sequence2
+                    ));
 
     },
     reCharacter:function(character){
@@ -147,10 +160,7 @@ var Mushroom = cc.Sprite.extend({
         this.stopAction( this.movingAction );
     
     },
-    isHit: function(){
-
-
-    },
+   
     createAnimationisHit: function(){
         this.getSprite();
         var animFrames = [];
