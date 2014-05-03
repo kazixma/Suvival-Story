@@ -14,7 +14,8 @@ var Character = cc.Sprite.extend({
          this.movingAction = this.createAnimationStand();
         this.GameLayer=GameLayer;
         this.v=4;
-        this.damage=500;
+        this.damage=1000;
+        
         this.start();
 
     },
@@ -28,16 +29,25 @@ var Character = cc.Sprite.extend({
     /*if(!this.click){
         this.walk();
         
-    }*/
+    }*/if(this.x<0){
+        //this.setPosition( cc.p( , this.y ) );
+        this.x=2;
+    }
+        else if(this.x>3480){
+        console.log(this.x);
+        this.x=3478;
+        
+       }else{ 
        this.walk()
 	   this.updatePosition();
-
+    }
 		
 		
     },
     walk: function() {
      
         if(this.direction==1){
+            this.setFlippedX(false);
             if(this.GameLayer.walk){
             this.x=this.x-4;
          }
@@ -46,6 +56,7 @@ var Character = cc.Sprite.extend({
         }
         if(this.direction==2){
             if(this.GameLayer.walk){
+            this.setFlippedX(true);
             this.x=this.x+4;
         }
            
@@ -90,30 +101,73 @@ var Character = cc.Sprite.extend({
 
     },
     checkIntersect:function(rect,i){
-    
+        
     
         this.intersectionRect = cc.rectIntersectsRect(rect, this.getRect());   
         console.log(this.intersectionRect);
-            if(this.intersectionRect){
-       // this.mushroom[i].reBack();
+        if(this.intersectionRect){
+          //  this.mushroomstop();
             this.mushroom[i].stop();
         //this.mushroom[i].reBack();
+           // this.mushroom[i].live=false;
 
-            var fadeOut = cc.FadeOut.create(0.4);
+           // var fadeOut = cc.FadeOut.create(1);
 
-            var sequence2 = cc.Sequence.create(
-                fadeOut,
-                cc.CallFunc.create(function () {
-                this.mushroom[i].removeFromParent();
-            }, this)
-            );
+            // var sequence2 = cc.Sequence.create(
+            //     fadeOut,
+            //     cc.CallFunc.create(function () {
+            //     this.mushroom[i].removeFromParent();
+            // }, this)
+            // );
+            this.mushroom[i].hit=true;
+            if(this.mushroom[i].hit){
+                 tempArray=new Array();
+                 
+                 tempArray.push(this.mushroom[i].createAnimationisHit());
+                
+                // tempArray.push(this.mushroom[i].reBack());
+                tempArray.push(this.mushroom[i].walk()); 
+             this.mushroom[i].runAction(cc.Sequence.create(tempArray));
+                // this.mushroom[i].runAction(cc.Sequence.create(
+                //  this.mushroom[i].createAnimationisHit(),
+                //  cc.CallFunc.create(function () {
+                //      this.mushroom[i].reBack();
+                //  }, this)
+                //   ));
+               if(this.mushroom[i].rebacked){
+                //console.log("kyu");
+                //this.mushroom[i].reBack();    
+                this.mushroom[i].hit=false;
+                this.mushroom[i].rebacked=false;
+                }
+            }
+            // this.mushroom[i].runAction(cc.Sequence.create(
+            // this.mushroom[i].createAnimationisHit(),this.mushroom[i].createAnimationMove();
+            // ));
+            // this.mushroom[i].movingAction = this.mushroom[i].createAnimationisHit();
+           // this.start();
+           // this.mushroom[i].hp=this.mushroom[i].hp-this.damage;
+       // this.mushroom[i].reBack();
+           if(this.mushroom[i].hp<0){
+                if(this.mushroom[i].live){
+                    this.mushroom[i].stop();
+            //this.mushroom[i].reBack();
+                    this.mushroom[i].live=false;
+                    var fadeOut = cc.FadeOut.create(1);
 
-            this.mushroom[i].runAction(cc.Sequence.create(
-            this.mushroom[i].createAnimationDie(),sequence2
-            ));
+                    var sequence2 = cc.Sequence.create(
+                    fadeOut,
+                    cc.CallFunc.create(function () {
+                    this.mushroom[i].removeFromParent();
+                     }, this)
+                    );
 
+                     this.mushroom[i].runAction(cc.Sequence.create(
+                    this.mushroom[i].createAnimationDie(),sequence2
+                    ));
 
-
+                }
+            }
 
         // this.mushroom[i].movingAction=this.mushroom[i].createAnimationisHit();
         // this.mushroom[i].start()
@@ -123,6 +177,9 @@ var Character = cc.Sprite.extend({
       // this.schedule(monsterDie,2,Infinity,null);
         console.log("Attack success");
 
+     }else{
+
+        this.mushroom[i].rebacked=true;
      }
 
     
@@ -274,12 +331,12 @@ var Character = cc.Sprite.extend({
         var animation = cc.Animation.create(animFrames, 0.07);
 
 
-        return cc.RepeatForever.create(cc.Animate.create(animation));    
+        return cc.RepeatForever.create(cc.Animate.create(animation));       
 
     },
     createAnimationDkWalk:function(){
         this.getSprite();
-        var animFrames = [];
+         var animFrames = [];
         for (var i = 0; i <= 7; i++) {
             var str = "walk_" + i + ".png";
             var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);

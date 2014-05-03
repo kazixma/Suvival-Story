@@ -31,6 +31,7 @@ var GameLayer = cc.LayerColor.extend({
             this.mushroom[i]=new Mushroom(posmonster,134);
             this.mushroom[i].setPosition(cc.p(posmonster,134));
             this.mushroom[i].scheduleUpdate();
+            this.mushroom[i].reCharacter(this.character);
             this.addChild(this.mushroom[i]);
         
         }
@@ -110,7 +111,7 @@ var GameLayer = cc.LayerColor.extend({
                     this.character.stop();
                     console.log(this.character.x);
                     console.log( 'Down: ' + e );
-                    this.character.setFlippedX(false);
+                   // this.character.setFlippedX(false);
                     this.character.movingAction = this.character.createAnimationWalk();
                 
                     console.log(this.click);
@@ -130,7 +131,7 @@ var GameLayer = cc.LayerColor.extend({
             if(this.click){
                 this.character.stop();
                 console.log( 'Down: ' + e );
-                this.character.setFlippedX(true);
+               // this.character.setFlippedX(true);
                 this.character.movingAction = this.character.createAnimationWalk();
 
                 console.log(this.click);
@@ -223,6 +224,7 @@ var GameLayer = cc.LayerColor.extend({
                     this.character.movingAction=this.character.createAnimationDkAttack();
                      
                     this.character.start();
+                     
                     this.attack=true;
                      
                      
@@ -316,19 +318,19 @@ var GameLayer = cc.LayerColor.extend({
                 console.log( 'Up: ' + e );
             }
             if(e==cc.KEY.c){
-                this.attack=false;
-                this.click=true;
-                this.character.stop();
-                if(this.character.direction==2){
+                 this.attack=false;
+                 this.click=true;
+                 this.character.stop();
+                 if(this.character.direction==2){
                     this.character.setFlippedX(true);
                     this.character.movingAction=this.character.createAnimationEvo();
                 }
                 if(this.character.direction==1){
-                    this.character.setFlippedX(false);
+                     this.character.setFlippedX(false);
                     this.character.movingAction=this.character.createAnimationEvo(); 
 
                 }
-        this.character.start();
+         this.character.start();
             
        
 

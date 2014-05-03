@@ -11,7 +11,11 @@ var Mushroom = cc.Sprite.extend({
         this.direction = 0;
         this.setFlippedX(false);
         this.movingAction = this.createAnimationMove();
-        this.hp=1000;
+        this.hp=100000;
+        this.damage=100;
+        this.live=true;
+        this.hit=false;
+        this.rebacked=true;
         this.start();
 
     },
@@ -24,15 +28,18 @@ var Mushroom = cc.Sprite.extend({
         this.walk();
         
     }*/
-        var randomdir=Math.floor(Math.random() * (50 - 1 + 1)) + 1;
-        if(randomdir==50){
-            this.direction=Math.floor(Math.random() * (3 - 1 + 1)) + 1;
-            this.walk();
-            this.walk();
-            this.walk(); 
-    	   this.updatePosition();
-        }
-		
+        if(this.live&&!this.hit){
+            var randomdir=Math.floor(Math.random() * (80 - 1 + 1)) + 1;
+            if(randomdir==50){
+                this.direction=Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+                var randomwalk=Math.floor(Math.random() * (8 - 1 + 1)) + 1;
+                for(i=0;i<randomwalk;i++){
+                this.walk();
+               }
+    	       this.updatePosition();
+            }
+	}
+        this.attack();
 		
     },
     walk: function() {
@@ -42,14 +49,14 @@ var Mushroom = cc.Sprite.extend({
             this.setFlippedX(false);
             this.movingAction = this.createAnimationMove();
             this.start();
-            this.x=this.x-15;
+            this.x=this.x-5;
         }
         if(this.direction==2){
             this.stop();
             this.setFlippedX(true);
             this.movingAction = this.createAnimationMove();
             this.start(); 
-            this.x=this.x+15;   
+            this.x=this.x+5;   
         }
         if(this.direction==0){
             this.x=this.x;  
@@ -58,18 +65,58 @@ var Mushroom = cc.Sprite.extend({
 
     },
     reBack:function(){
+        this.stop();
+        var actionTo = cc.MoveBy.create(this.getMaxX()*0.03, cc.p(this.getMaxX() -0.02, 0));
+         
         if(this.direction==1){
+             actionTo = cc.MoveBy.create(this.getMaxX()*0.03, cc.p(this.getMaxX() -0.02 , 0));
+             this.movingAction=actionTo;
+             this.start();
             
-            this.x=this.x-5;
         }
         if(this.direction==2){
            
-            this.x=this.x+5;   
+             actionTo = cc.MoveBy.create(this.getMaxX()*0.03, cc.p(this.getMaxX() +0.02 , 0)); 
+             this.movingAction=actionTo;
+             this.start();
         }
-        if(this.direction==0){
-            this.x=this.x;  
-        }
+        
+        
 
+    },
+    reCharacter:function(character){
+        this.character=character;
+
+    },
+    attack:function(){
+    
+    
+        this.checkIntersect(this.character.getRect());
+        
+        
+
+    },
+
+    checkIntersect:function(rect){
+        
+    
+        this.intersectionRect = cc.rectIntersectsRect(rect, this.getRect());   
+        //console.log(this.intersectionRect);
+            if(this.intersectionRect){
+               // this.hit=true;
+               // if(this.hit){    
+                    // this.stop();
+                    // this.movingAction = this.createAnimationisHit();
+                    // this.start();
+                    // this.hit=false;
+                    // console.log("monster attack");
+             //}   
+
+        }
+        
+         
+
+    
     },
      getSprite:function(){
         return cc.SpriteFrameCache.getInstance().addSpriteFrames(mushroom_s_plist,mushroom_s);
@@ -116,7 +163,7 @@ var Mushroom = cc.Sprite.extend({
         var animation = cc.Animation.create(animFrames, 0.5);
 
 
-        return cc.RepeatForever.create(cc.Animate.create(animation)); 
+        return cc.Animate.create(animation);  
 
     },
     createAnimationMove: function() {
@@ -131,7 +178,7 @@ var Mushroom = cc.Sprite.extend({
         var animation = cc.Animation.create(animFrames, 0.2);
 
 
-        return cc.Animate.create(animation);    
+        return cc.RepeatForever.create(cc.Animate.create(animation));       
              
         
     },
@@ -146,6 +193,7 @@ var Mushroom = cc.Sprite.extend({
 
         var animation = cc.Animation.create(animFrames, 0.2);
         //this.scthis.removeFromParent();
+
 
         return cc.Animate.create(animation);         
     },
