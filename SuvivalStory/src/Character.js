@@ -15,7 +15,7 @@ var Character = cc.Sprite.extend({
         this.GameLayer=GameLayer;
         this.v=4;
         this.damage=1000;
-        
+        this.change=false;
         this.start();
 
     },
@@ -49,15 +49,15 @@ var Character = cc.Sprite.extend({
         if(this.direction==1){
             this.setFlippedX(false);
             if(this.GameLayer.walk){
-            this.x=this.x-4;
+                this.x=this.x-4;
          }
         
     
         }
         if(this.direction==2){
             if(this.GameLayer.walk){
-            this.setFlippedX(true);
-            this.x=this.x+4;
+                this.setFlippedX(true);
+                this.x=this.x+4;
         }
            
         }
@@ -367,7 +367,70 @@ var Character = cc.Sprite.extend({
         
          
         
-    }
+    },
+    Evo:function(){
+        this.stop();
+        this.movingAction=this.createAnimationEvo();
+        this.change=true;
+        this.start();
+
+    },
+    Normal:function(){
+        this.stop();
+        this.movingAction=this.createAnimationStand();
+        this.change=false;
+        this.start();
+
+    },
+    EvoWalk:function(){
+        this.stop();
+                    
+        this.movingAction = this.createAnimationDkWalk();
+                
+        this.start();
+
+    },
+    NormalWalk:function(){
+        this.stop();
+                    
+        this.movingAction = this.createAnimationWalk();
+                
+        this.start();
+
+    },
+    NormalAttack:function(){
+        this.stop();
+                    
+        this.movingAction = this.createAnimationAttack();
+                
+        this.start();
+
+    },
+     EvoAttack:function(){
+        this.stop();
+                    
+        this.movingAction = this.createAnimationDkAttack();
+                
+        this.start();
+
+    },
+    AttackDir:function(){
+        if(this.direction==1){
+                    
+                    this.setFlippedX(false);
+                    
+                     
+                }
+                if(this.direction==2){
+                     
+                     this.setFlippedX(true);
+                     
+                     
+                    
+
+                }
+
+    },
 
 });
  Character.DIR = {

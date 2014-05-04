@@ -69,14 +69,14 @@ var Mushroom = cc.Sprite.extend({
         var actionTo = cc.MoveBy.create(0.1, cc.p(15, 0));
          
         if(this.direction==1){
-             actionTo = cc.MoveBy.create(0.1, cc.p(15 , 0));
+             actionTo = cc.MoveBy.create(0.1, cc.p(5 , 0));
              //this.movingAction=actionTo;
              //this.start();
             
         }
         if(this.direction==2){
            
-             actionTo = cc.MoveBy.create(0.1, cc.p(15 , 0)); 
+             actionTo = cc.MoveBy.create(0.1, cc.p(-5 , 0)); 
             // this.movingAction=actionTo;
              //this.start();
         }
