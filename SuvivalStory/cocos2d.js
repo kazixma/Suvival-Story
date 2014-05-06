@@ -17,7 +17,13 @@
         'src/BackgroundMaple.js',
         'src/Mushroom.js',
         'src/resource.js',
-        'src/GameLayer2.js'     //add your own files in order here
+        'src/GameLayer2.js',
+        'src/hp.js',
+        'src/mp.js',
+        'src/bgstat.js',
+        'src/bgstat2.js',
+        'src/ehpmp.js',
+        'src/arrowkey.js',     //add your own files in order here
         ]
     };
 

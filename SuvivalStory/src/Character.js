@@ -14,9 +14,16 @@ var Character = cc.Sprite.extend({
          this.movingAction = this.createAnimationStand();
         this.GameLayer=GameLayer;
         this.v=4;
+        this.hp=500;
+        this.mp=500;
         this.damage=1000;
         this.change=false;
+        this.sta_attack=false;
         this.start();
+
+    },
+    getAttack:function(){
+        return this.sta_attack;
 
     },
    

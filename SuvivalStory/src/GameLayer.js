@@ -12,14 +12,15 @@ var GameLayer = cc.LayerColor.extend({
        // var nummonster=Math.floor(Math.random() * (20 - 5 + 5)) + 5;
         this.nummonster =10;
         this.mapleground.setPosition(new cc.Point(0,400));
-
+        this.gamelayer2=new GameLayer2(this);
+       // this.gamelayer2.restatus(this.character);
 
 
        // this.character.setPosition( new cc.Point( 400, 500 ) );
         //this.character.speed=5;
         //alert(this.character.speed)
         this.click=true;
-        this.attack=false;
+        this.character.sta_attack=false;
         this.addChild(this.mapleground);
         this.scheduleUpdate();
         this.mapleground.scheduleUpdate();
@@ -62,7 +63,7 @@ var GameLayer = cc.LayerColor.extend({
 
     // },
     update:function(){
-        if(this.attack){
+        if(this.character.sta_attack){
         this.character.attack();}
 
    // this.checkScene();
@@ -78,6 +79,10 @@ var GameLayer = cc.LayerColor.extend({
     
 
     // },
+    getCharacter:function(){
+        return this.character;
+
+    },
     createMonster:function(){
         this.monster =new Mushroom(400,200);
         this.monster.setPosition(cc.p(400,200));
@@ -126,7 +131,7 @@ var GameLayer = cc.LayerColor.extend({
                 this.character.reMonster(this.mushroom);
                 this.character.AttackDir();
                 this.character.NormalAttack();
-                 this.attack=true;
+                 this.character.sta_attack=true;
                      
                      
                      this.click=false;
@@ -166,7 +171,7 @@ var GameLayer = cc.LayerColor.extend({
                     this.character.AttackDir();
                     this.character.EvoAttack();
                      
-                    this.attack=true;
+                    this.character.sta_attack=true;
                      
                      
                      this.click=false;
@@ -196,14 +201,15 @@ var GameLayer = cc.LayerColor.extend({
                 console.log( 'Up: ' + e );
             }
             if(e==cc.KEY.c){
-                this.attack=false;
+                this.character.sta_attack=false;
                 this.click=true;
                 this.character.Normal();
                 
                 
              }
         
-        }else{
+        }
+        else{
             if(e==cc.KEY.left){
                 
                 this.click=true; 
@@ -219,7 +225,7 @@ var GameLayer = cc.LayerColor.extend({
                 console.log( 'Up: ' + e );
             }
             if(e==cc.KEY.c){
-                 this.attack=false;
+                 this.character.sta_attack=false;
                  this.click=true;
                  this.character.Evo();
             
@@ -238,7 +244,7 @@ var StartScene = cc.Scene.extend({
         var layer = new GameLayer();
         layer.init();
         var layer2 = new GameLayer2();
-        layer2.init();
+        layer2.init(layer);
         this.addChild( layer );
         this.addChild( layer2 );
         

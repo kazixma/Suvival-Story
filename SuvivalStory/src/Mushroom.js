@@ -12,10 +12,11 @@ var Mushroom = cc.Sprite.extend({
         this.setFlippedX(false);
         this.movingAction = this.createAnimationMove();
         this.hp=100000;
-        this.damage=100;
+        this.damage=1;
         this.live=true;
         this.hit=false;
         this.rebacked=true;
+        
         this.start();
 
     },
@@ -39,7 +40,9 @@ var Mushroom = cc.Sprite.extend({
     	       this.updatePosition();
             }
 	}
+        if(!this.character.sta_attack){
         this.attack();
+    }
 		
     },
     walk: function() {
@@ -116,14 +119,15 @@ var Mushroom = cc.Sprite.extend({
         this.intersectionRect = cc.rectIntersectsRect(rect, this.getRect());   
         //console.log(this.intersectionRect);
             if(this.intersectionRect){
-               // this.hit=true;
-               // if(this.hit){    
+               this.hit=true;
+               if(this.hit){    
                     // this.stop();
                     // this.movingAction = this.createAnimationisHit();
                     // this.start();
-                    // this.hit=false;
-                    // console.log("monster attack");
-             //}   
+                    this.character.hp-=this.damage;
+                    this.hit=false;
+                    console.log("monster attack");
+             }   
 
         }
         
