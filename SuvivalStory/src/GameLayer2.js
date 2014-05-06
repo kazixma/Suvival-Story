@@ -55,17 +55,48 @@ var GameLayer2 = cc.LayerColor.extend({
       console.log(e);
       if(e==49){
         this.randomKey();
-
+        this.numKey=0;
       }
-      else if(e==cc.KEY.e){
+        else if(e==cc.KEY.e){
        
 
       }
+       else if(e==38){
+          this.checkKey(38);
+
+       }
+       else if(e==40){
+          this.checkKey(40);
+
+       }
+       else if(e==39){
+          this.checkKey(39);
+
+       }
+       else if(e==37){
+        this.checkKey(37);
+
+       }
         
     },
     onKeyUp: function( e ) {
-       this.deleteKey();
-       console.log(e);
+      //this.deleteKey();
+       if(e==38){
+
+
+       }
+       else if(e==40){
+
+
+       }
+       else if(e==39){
+
+
+       }
+       else if(e==37){
+
+
+       }
 
 
     },
@@ -79,27 +110,67 @@ var GameLayer2 = cc.LayerColor.extend({
             this.arrow[i].setPosition( cc.p( this.arrow[i].x, this.arrow[i].y ) );
             if(typeKey==1){
 
+              this.arrow[i].statusKey=38;
               this.arrow[i].movingAction=this.arrow[i].createAnimationStayUp();
               this.arrow[i].start();
 
             }
             else if(typeKey==2){
+              this.arrow[i].statusKey=40;
               this.arrow[i].movingAction=this.arrow[i].createAnimationStayDown();
               this.arrow[i].start();
             }
             else if(typeKey==3){
+              this.arrow[i].statusKey=39;
               this.arrow[i].movingAction=this.arrow[i].createAnimationStayRight();
               this.arrow[i].start();
             }
             else
             {
+              this.arrow[i].statusKey=37;
               this.arrow[i].movingAction=this.arrow[i].createAnimationStayLeft();
               this.arrow[i].start();
             }
             this.addChild(this.arrow[i]);
           }
     },
-    deleteKey:function(){
+    checkKey:function(pressKey){
+      if(this.arrow[this.numKey].statusKey==pressKey){
+         if(this.arrow[this.numKey].statusKey==38){ 
+         this.arrow[this.numKey].stop(); 
+         this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationSuccessUp();    
+         this.arrow[this.numKey].start();
+         //this.deleteEachKey(this.numKey); 
+         this.numKey=this.numKey+1;
+        }
+        else if(this.arrow[this.numKey].statusKey==40){ 
+         this.arrow[this.numKey].stop(); 
+         this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationSuccessDown();    
+         this.arrow[this.numKey].start(); 
+         this.numKey=this.numKey+1;
+        }
+        else if(this.arrow[this.numKey].statusKey==39){ 
+         this.arrow[this.numKey].stop(); 
+         this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationSuccessRight();    
+         this.arrow[this.numKey].start(); 
+         this.numKey=this.numKey+1;
+        }
+        else if(this.arrow[this.numKey].statusKey==37){ 
+         this.arrow[this.numKey].stop(); 
+         this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationSuccessLeft();    
+         this.arrow[this.numKey].start(); 
+         this.numKey=this.numKey+1;
+        }
+      }
+
+
+
+    },
+    deleteEachKey:function(i){
+      this.removeChild(this.arrow[i]);
+
+    },
+    deleteAllKey:function(){
       for(i=0;i<this.keyNum;i++){
         this.removeChild(this.arrow[i]);
       }

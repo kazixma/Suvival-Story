@@ -7,7 +7,9 @@ var arrowkey = cc.Sprite.extend({
         
         this.x=x;
         this.y=y;
-       	
+       	this.statusKey=null;
+        this.successKey=false;
+        this.failKey=false;
        	this.setAnchorPoint(cc.p(0,0));
        
     },
