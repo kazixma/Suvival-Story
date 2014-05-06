@@ -161,7 +161,35 @@ var GameLayer2 = cc.LayerColor.extend({
          this.arrow[this.numKey].start(); 
          this.numKey=this.numKey+1;
         }
+      }else{
+         if(this.arrow[this.numKey].statusKey==38){ 
+         this.arrow[this.numKey].stop(); 
+         this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationFailUp();    
+         this.arrow[this.numKey].start();
+         //this.deleteEachKey(this.numKey); 
+         this.numKey=this.numKey+1;
+        }
+        else if(this.arrow[this.numKey].statusKey==40){ 
+         this.arrow[this.numKey].stop(); 
+         this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationFailDown();    
+         this.arrow[this.numKey].start(); 
+         this.numKey=this.numKey+1;
+        }
+        else if(this.arrow[this.numKey].statusKey==39){ 
+         this.arrow[this.numKey].stop(); 
+         this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationFailRight();    
+         this.arrow[this.numKey].start(); 
+         this.numKey=this.numKey+1;
+        }
+        else if(this.arrow[this.numKey].statusKey==37){ 
+         this.arrow[this.numKey].stop(); 
+         this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationFailLeft();    
+         this.arrow[this.numKey].start(); 
+         this.numKey=this.numKey+1;
+
+
       }
+    }
 
 
 
