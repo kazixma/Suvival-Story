@@ -49,10 +49,17 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild(this.character );
 
         this.character.scheduleUpdate();
-
-       
        
 
+        //this.skill=[];
+       //  for(i=0;i<=7;i++){
+       //  this.skill[i]=new skill(this.character.x+50,this.character.y+120,this);
+       //  this.skill[i].setPosition(cc.p(this.skill[i].x,this.skill[i].y));
+       //  this.skill[i].scheduleUpdate();
+       //  this.addChild(this.skill[i]);
+       //  this.skill[i].reMonster(this.mushroom);
+       // }
+        
         this.setKeyboardEnabled( true );
 
         },
@@ -67,10 +74,12 @@ var GameLayer = cc.LayerColor.extend({
     update:function(){
         if(this.character.sta_attack){
         this.character.attack();}
+        //console.log(this.pressSkill);
 
    // this.checkScene();
     //this.schedule(this.createMonster(),10,Infinity,null);
     },
+
     // checkScene:function(){
     //     if(this.character.x<300||this.character.x>900){
     //         console.log("slide");
@@ -92,11 +101,63 @@ var GameLayer = cc.LayerColor.extend({
         this.monster.scheduleUpdate();
 
     },
-    callSkill:function(){
-        this.skill=new skill(this.character.x+50,this.character.y+120);
-        this.skill.setPosition(cc.p(this.skill.x,this.skill.y));
-       this.skill.scheduleUpdate();
-       this.addChild(this.skill);
+    // callSkill1:function(){
+            
+    //         this.addChild(this.skill);
+            
+            
+
+    //     //this.skill.stop();
+    //    //  this.skill=[];
+    //    //  for(i=0;i<=7;i++){
+    //    //  this.skill[i]=new skill(this.character.x+50,this.character.y+120);
+    //    //  this.skill[i].setPosition(cc.p(this.skill[i].x,this.skill[i].y));
+    //    //  this.skill[i].scheduleUpdate();
+    //    //  this.addChild(this.skill[i]);
+    //    //  this.skill[i].reMonster(this.mushroom);
+    //    //  if(i==0){
+    //    //      this.skill[i].movingAction=this.skill[i].createAnimationThunderSkill();
+
+    //    //  }
+    //    //  else if(i==1){
+    //    //      this.skill[i].movingAction=this.skill[i].createAnimationIceSwordSkill();
+
+    //    //  }
+    //    // }
+
+
+    // },
+    //  callSkill2:function(){
+    
+    //         this.addChild(this.skill2);
+           
+
+    //     //this.skill.stop();
+    //    //  this.skill=[];
+    //    //  for(i=0;i<=7;i++){
+    //    //  this.skill[i]=new skill(this.character.x+50,this.character.y+120);
+    //    //  this.skill[i].setPosition(cc.p(this.skill[i].x,this.skill[i].y));
+    //    //  this.skill[i].scheduleUpdate();
+    //    //  this.addChild(this.skill[i]);
+    //    //  this.skill[i].reMonster(this.mushroom);
+    //    //  if(i==0){
+    //    //      this.skill[i].movingAction=this.skill[i].createAnimationThunderSkill();
+
+    //    //  }
+    //    //  else if(i==1){
+    //    //      this.skill[i].movingAction=this.skill[i].createAnimationIceSwordSkill();
+
+    //    //  }
+    //    // }
+
+
+    // },
+    deleteAllSkill:function(){
+        // for(i=0;i<=7;i++){
+        //     this.removeChild(this.skill[i]);
+
+        // }
+        this.removeChild(this.skill);
 
     },
     onKeyDown: function( e ) {
@@ -149,34 +210,39 @@ var GameLayer = cc.LayerColor.extend({
             }
         }
         else if(e==49){
-          this.pressSkill=49;               
+
+         // this.deleteAllSkill();              
           this.character.useSkill=true;   
-          this.callSkill();
-          this.skill.reMonster(this.mushroom);
+        // this.callSkill1();
+          this.pressSkill=49; 
+          //this.skill.reMonster(this.mushroom);
           
           
         }
         else if(e==50){
-            this.pressSkill=50;
+          //  this.deleteAllSkill(); 
           this.character.useSkill=true; 
-           this.callSkill();
-          this.skill.reMonster(this.mushroom);
+          // this.callSkill1();
+           this.pressSkill=50;
+          //this.skill.reMonster(this.mushroom);
         
           
         }
          else if(e==51){
-            this.pressSkill=51;
+             
           this.character.useSkill=true; 
-           this.callSkill();
-          this.skill.reMonster(this.mushroom);
+           //this.callSkill();
+           this.pressSkill=51;
+         // this.skill.reMonster(this.mushroom);
         
           
         }
          else if(e==52){
-            this.pressSkill=52;
+            
           this.character.useSkill=true; 
-           this.callSkill();
-          this.skill.reMonster(this.mushroom);
+          // this.callSkill();
+          this.pressSkill=52;
+         // this.skill.reMonster(this.mushroom);
         
           
         }
@@ -225,34 +291,38 @@ var GameLayer = cc.LayerColor.extend({
 
         }
         else if(e==49){
-            this.pressSkill=49;
+            
           this.character.useSkill=true; 
-           this.callSkill();
-          this.skill.reMonster(this.mushroom);
+          // this.callSkill();
+           this.pressSkill=49;
+         // this.skill.reMonster(this.mushroom);
         
           
         }
          else if(e==50){
-            this.pressSkill=50;
+            
           this.character.useSkill=true; 
-           this.callSkill();
-          this.skill.reMonster(this.mushroom);
+         // this.callSkill();
+           this.pressSkill=50;
+         // this.skill.reMonster(this.mushroom);
         
           
         }
          else if(e==51){
-            this.pressSkill=51;
+            
           this.character.useSkill=true; 
-           this.callSkill();
-          this.skill.reMonster(this.mushroom);
+         //this.callSkill();
+           this.pressSkill=51;
+        //  this.skill.reMonster(this.mushroom);
         
           
         }
          else if(e==52){
-            this.pressSkill=52;
+            
           this.character.useSkill=true; 
-           this.callSkill();
-          this.skill.reMonster(this.mushroom);
+         //this.callSkill();
+           this.pressSkill=52;
+         // this.skill.reMonster(this.mushroom);
         
           
         }

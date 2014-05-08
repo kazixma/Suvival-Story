@@ -1,13 +1,14 @@
-var skill = cc.Sprite.extend({
+var skill6 = cc.Sprite.extend({
     ctor: function(x,y) {
         this._super();
        // this.initWithFile( 'images/stay_0.png' );
 
        	this.movingAction = null;
-       // this.GameLayer=GameLayer;
+        
         this.x=x;
         this.y=y;
-       
+       	this.statusKey=null;
+        this.successKey=false;
         //this.failKey=false;
 
        	this.setAnchorPoint(cc.p(0.5,0.5));
@@ -91,13 +92,12 @@ var skill = cc.Sprite.extend({
           this.runAction(cc.Sequence.create(
             this.createAnimationFishSkill(),
             cc.CallFunc.create(function () {
-                this.removeFromParent(true);
+                this.removeFromParent();
             }, this)
         ));
 
     },
     createAnimationIceSwordSkill: function() {
-     
         this.getSprite4();
         var animFrames = [];
         for (var i = 0; i <= 13; i++) {
@@ -115,12 +115,13 @@ var skill = cc.Sprite.extend({
     },
     runIceSwordSkill:function(){
        
-           this.runAction(cc.Sequence.create(
+          this.runAction(cc.Sequence.create(
             this.createAnimationIceSwordSkill(),
             cc.CallFunc.create(function () {
-                this.stopAllActions();
+                this.removeFromParent(this.cleanup());
             }, this)
         ));
+
     },
     createAnimationLaserSkill: function() {
         this.getSprite5();
@@ -199,15 +200,12 @@ var skill = cc.Sprite.extend({
 
     },
      createAnimationThunderSkill: function() {
-       // this.stopAllActions();
         this.getSprite8();
         var animFrames = [];
         for (var i = 0; i <= 33; i++) {
             var str = "effect_" + i +".png";
             var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
-            
             animFrames.push(frame);
-            
         }
 
         var animation = cc.Animation.create(animFrames, 0.2);
@@ -222,21 +220,9 @@ var skill = cc.Sprite.extend({
          this.runAction(cc.Sequence.create(
             this.createAnimationThunderSkill(),
             cc.CallFunc.create(function () {
-                this.stopAllActions();
+                this.removeFromParent(this.cleanup());
             }, this)
         ));
- // var sequence2 = cc.Sequence.create(
- //                    cc.CallFunc.create(function () {
- //                    this.stopAllActions();
- //                     }, this),
- //                    cc.CallFunc.create(function () {
- //                    this.removeFromParent(true);
- //                     }, this)
- //                    );
-
- //                     this.runAction(cc.Sequence.create(
- //                    this.createAnimationThunderSkill(),sequence2
- //                    ));
     //this.movingAction=this.createAnimationThunderSkill();
 
 
