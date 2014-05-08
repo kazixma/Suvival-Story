@@ -8,8 +8,8 @@ var GameLayer2 = cc.LayerColor.extend({
       var draw = cc.DrawNode.create();
             
          // art
-      this.GameLayer2=GameLayer;
-      
+      this.GameLayer1=GameLayer;
+      this.callKey=true;
       this.bgstat=new bgstat(0,-2);
       this.bgstat2=new bgstat2(568,-3,'images/test3.png');
       this.bgstat3=new bgstat2(-9,-3,'images/test.png');
@@ -25,12 +25,14 @@ var GameLayer2 = cc.LayerColor.extend({
       this.ehpmp1.setPosition(cc.p(this.ehpmp1.x,this.ehpmp1.y));
       this.ehpmp2=new ehpmp(630,5);
       this.ehpmp2.setPosition(cc.p(this.ehpmp2.x,this.ehpmp2.y));
+      
         // draw.drawSegment( new cc.Point(100,20), new cc.Point(300,20),10, new cc.Color4F(0,0.635,0.909,1)); // sound 
         // draw.drawSegment( new cc.Point(100,50), new cc.Point(300,50),10, new cc.Color4F(0.423,0.184,0.517,1)); // writing
       //this.hp.setScaleX() ; 
       this.scheduleUpdate();
       //this.character=null;
-      this.character=this.GameLayer2.getCharacter();
+      this.character=this.GameLayer1.getCharacter();
+      
       this.addChild(this.bgstat);
       this.addChild(this.bgstat2);
       
@@ -40,6 +42,7 @@ var GameLayer2 = cc.LayerColor.extend({
       this.addChild(this.hp);
       this.addChild(this.ehpmp2);
       this.addChild(this.mp);
+      
       this.setKeyboardEnabled( true );
 
     },
@@ -49,35 +52,42 @@ var GameLayer2 = cc.LayerColor.extend({
     
    
     update:function(){
-      this.hp.setScaleX(this.character.hp/500);
+      if(this.character.hp>0){
+        this.hp.setScaleX(this.character.hp/500);
+      }
+
    },
     onKeyDown: function( e ) {
       console.log(e);
-      if(e==49){
-        this.randomKey();
-        this.numKey=0;
-      }
-        else if(e==cc.KEY.e){
-       
+       //this.skill.removeFromParent();
+      if(this.character.useSkill){
 
-      }
-       else if(e==38){
-          this.checkKey(38);
-
-       }
-       else if(e==40){
-          this.checkKey(40);
-
-       }
-       else if(e==39){
-          this.checkKey(39);
-
-       }
-       else if(e==37){
-        this.checkKey(37);
-
-       }
         
+         if(this.callKey){
+          this.numKey=0;
+          this.deleteAllKey();
+          this.randomKey();
+          this.callKey=false;
+
+         } 
+         
+         if(e==38){
+            this.checkKey(38);
+
+         }
+         else if(e==40){
+            this.checkKey(40);
+
+         }
+         else if(e==39){
+            this.checkKey(39);
+
+         }
+         else if(e==37){
+          this.checkKey(37);
+
+         }
+      }
     },
     onKeyUp: function( e ) {
       //this.deleteKey();
@@ -141,54 +151,70 @@ var GameLayer2 = cc.LayerColor.extend({
          this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationSuccessUp();    
          this.arrow[this.numKey].start();
          //this.deleteEachKey(this.numKey); 
+         this.arrow[this.numKey].successKey=true;
          this.numKey=this.numKey+1;
         }
         else if(this.arrow[this.numKey].statusKey==40){ 
          this.arrow[this.numKey].stop(); 
          this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationSuccessDown();    
          this.arrow[this.numKey].start(); 
+        this.arrow[this.numKey].successKey=true;
          this.numKey=this.numKey+1;
         }
         else if(this.arrow[this.numKey].statusKey==39){ 
          this.arrow[this.numKey].stop(); 
          this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationSuccessRight();    
-         this.arrow[this.numKey].start(); 
+         this.arrow[this.numKey].start();
+        this.arrow[this.numKey].successKey=true ;
          this.numKey=this.numKey+1;
         }
         else if(this.arrow[this.numKey].statusKey==37){ 
          this.arrow[this.numKey].stop(); 
          this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationSuccessLeft();    
          this.arrow[this.numKey].start(); 
+          this.arrow[this.numKey].successKey=true;
          this.numKey=this.numKey+1;
         }
       }else{
-         if(this.arrow[this.numKey].statusKey==38){ 
-         this.arrow[this.numKey].stop(); 
-         this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationFailUp();    
-         this.arrow[this.numKey].start();
-         //this.deleteEachKey(this.numKey); 
-         this.numKey=this.numKey+1;
-        }
-        else if(this.arrow[this.numKey].statusKey==40){ 
-         this.arrow[this.numKey].stop(); 
-         this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationFailDown();    
-         this.arrow[this.numKey].start(); 
-         this.numKey=this.numKey+1;
-        }
-        else if(this.arrow[this.numKey].statusKey==39){ 
-         this.arrow[this.numKey].stop(); 
-         this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationFailRight();    
-         this.arrow[this.numKey].start(); 
-         this.numKey=this.numKey+1;
-        }
-        else if(this.arrow[this.numKey].statusKey==37){ 
-         this.arrow[this.numKey].stop(); 
-         this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationFailLeft();    
-         this.arrow[this.numKey].start(); 
-         this.numKey=this.numKey+1;
+
+      //    if(this.arrow[this.numKey].statusKey==38){ 
+      //    this.arrow[this.numKey].stop(); 
+      //    this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationFailUp();    
+      //    this.arrow[this.numKey].start();
+      //     this.arrow[this.numKey].successKey=false;
+      //    //this.deleteEachKey(this.numKey); 
+      //    this.numKey=this.numKey+1;
+      //   }
+      //   else if(this.arrow[this.numKey].statusKey==40){ 
+      //    this.arrow[this.numKey].stop(); 
+      //    this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationFailDown();    
+      //    this.arrow[this.numKey].start();
+      //    this.arrow[this.numKey].successKey=false; 
+      //    this.numKey=this.numKey+1;
+      //   }
+      //   else if(this.arrow[this.numKey].statusKey==39){ 
+      //    this.arrow[this.numKey].stop(); 
+      //    this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationFailRight();    
+      //    this.arrow[this.numKey].start(); 
+      //    this.arrow[this.numKey].successKey=false;
+      //    this.numKey=this.numKey+1;
+      //   }
+      //   else if(this.arrow[this.numKey].statusKey==37){ 
+      //    this.arrow[this.numKey].stop(); 
+      //    this.arrow[this.numKey].movingAction=this.arrow[this.numKey].createAnimationFailLeft();    
+      //    this.arrow[this.numKey].start();
+      //    this.arrow[this.numKey].successKey=false; 
+      //    this.numKey=this.numKey+1;
 
 
-      }
+      // }
+      this.deleteAllKey();
+      this.callKey=true;
+      this.character.useSkill=false;
+    }
+    if(this.keyNum==this.numKey){
+      this.allKeyCorrect();
+
     }
 
 
@@ -205,6 +231,78 @@ var GameLayer2 = cc.LayerColor.extend({
     
         
     },
+    allKeyCorrect:function(){
+      var correct=false;
+      this.countKeySuccess=0;
+      for(i=0;i<this.keyNum;i++){
+        if( this.arrow[i].successKey){
+          this.countKeySuccess++;
+
+        }
+
+      }
+      if(this.countKeySuccess==this.keyNum){
+          console.log("allkey");
+          this.deleteAllKey();
+          this.callKey=true;
+          this.character.useSkill=false;
+         // var bskill=this.buildSkill();
+         // var rskill=this.removeSkill();
+           correct=true;
+        if(this.character.change==false){   
+           if(this.GameLayer1.pressSkill==49){
+               this.GameLayer1.skill.runDkSwordSkill();
+            }
+            else if(this.GameLayer1.pressSkill==50){
+
+
+            }
+            else if(this.GameLayer1.pressSkill==51){
+
+              
+            }
+            else if(this.GameLayer1.pressSkill==52){
+
+              
+            }
+          }
+          else{
+            if(this.GameLayer1.pressSkill==49){
+               this.GameLayer1.skill.runDkSwordSkill();
+            }
+            else if(this.GameLayer1.pressSkill==50){
+
+
+            }
+            else if(this.GameLayer1.pressSkill==51){
+
+              
+            }
+            else if(this.GameLayer1.pressSkill==52){
+
+              
+            }
+
+
+          }
+          //this.skill.movingAction=this.skill.createAnimationAncestral();
+          //this.skill.start();
+
+      }
+      //return correct;
+
+
+    },
+    // removeSkill:function(){
+    //   this.skill.stop();
+
+    // },
+    // buildSkill:function(){
+    //   this.skill.movingAction=this.skill.createAnimationAncestral();
+    //   this.skill.start()
+
+    // },
+   
 
     
        

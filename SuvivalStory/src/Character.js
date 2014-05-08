@@ -19,6 +19,7 @@ var Character = cc.Sprite.extend({
         this.damage=1000;
         this.change=false;
         this.sta_attack=false;
+        this.useSkill=false;
         this.start();
 
     },

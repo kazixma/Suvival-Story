@@ -23,7 +23,8 @@
         'src/bgstat.js',
         'src/bgstat2.js',
         'src/ehpmp.js',
-        'src/arrowkey.js',     //add your own files in order here
+        'src/arrowkey.js',
+        'src/skill.js',     //add your own files in order here
         ]
     };
 

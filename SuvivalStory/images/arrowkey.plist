@@ -534,7 +534,7 @@
             <key>size</key>
             <string>{1024,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:01a4e8d59452e6590a34b925e363caa2:e135c1677fc630174992baa9b7ff49dc:e1a9f806eb0888d3482bd4038894fa40$</string>
+            <string>$TexturePacker:SmartUpdate:1d8e29a8989089e6c913f67321bf470d:e135c1677fc630174992baa9b7ff49dc:e1a9f806eb0888d3482bd4038894fa40$</string>
             <key>textureFileName</key>
             <string>arrowkey.png</string>
         </dict>

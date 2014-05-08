@@ -6,7 +6,7 @@ var GameLayer = cc.LayerColor.extend({
         this.mapleground =new BackgroundMaple(0,400);    
     
         this.mushroom=new Array();
-   
+        //this.GameLayer2=GameLayer2;
         this.character = new Character(400,134,this);
         this.walk=false;
        // var nummonster=Math.floor(Math.random() * (20 - 5 + 5)) + 5;
@@ -14,11 +14,12 @@ var GameLayer = cc.LayerColor.extend({
         this.mapleground.setPosition(new cc.Point(0,400));
         this.gamelayer2=new GameLayer2(this);
        // this.gamelayer2.restatus(this.character);
-
+       
 
        // this.character.setPosition( new cc.Point( 400, 500 ) );
         //this.character.speed=5;
         //alert(this.character.speed)
+        this.pressSkill=0;
         this.click=true;
         this.character.sta_attack=false;
         this.addChild(this.mapleground);
@@ -48,6 +49,7 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild(this.character );
 
         this.character.scheduleUpdate();
+
        
        
 
@@ -90,9 +92,18 @@ var GameLayer = cc.LayerColor.extend({
         this.monster.scheduleUpdate();
 
     },
+    callSkill:function(){
+        this.skill=new skill(this.character.x+50,this.character.y+120);
+        this.skill.setPosition(cc.p(this.skill.x,this.skill.y));
+       this.skill.scheduleUpdate();
+       this.addChild(this.skill);
+
+    },
     onKeyDown: function( e ) {
+     if(!this.character.useSkill){   
         if(e==cc.KEY.w){
             this.character.Evo();
+
 
         }
         if(e==cc.KEY.e){
@@ -112,7 +123,7 @@ var GameLayer = cc.LayerColor.extend({
 
             }
         }
-        if(e==cc.KEY.right){
+       else if(e==cc.KEY.right){
            
                     
             this.character.direction=2;
@@ -125,7 +136,7 @@ var GameLayer = cc.LayerColor.extend({
             
             }
         }
-        if(e==cc.KEY.c){
+        else if(e==cc.KEY.c){
             
             if(this.click){
                 this.character.reMonster(this.mushroom);
@@ -134,8 +145,40 @@ var GameLayer = cc.LayerColor.extend({
                  this.character.sta_attack=true;
                      
                      
-                     this.click=false;
+                this.click=false;
             }
+        }
+        else if(e==49){
+          this.pressSkill=49;               
+          this.character.useSkill=true;   
+          this.callSkill();
+          this.skill.reMonster(this.mushroom);
+          
+          
+        }
+        else if(e==50){
+            this.pressSkill=50;
+          this.character.useSkill=true; 
+           this.callSkill();
+          this.skill.reMonster(this.mushroom);
+        
+          
+        }
+         else if(e==51){
+            this.pressSkill=51;
+          this.character.useSkill=true; 
+           this.callSkill();
+          this.skill.reMonster(this.mushroom);
+        
+          
+        }
+         else if(e==52){
+            this.pressSkill=52;
+          this.character.useSkill=true; 
+           this.callSkill();
+          this.skill.reMonster(this.mushroom);
+        
+          
         }
         }else{
             if ( e == cc.KEY.left) {
@@ -150,7 +193,7 @@ var GameLayer = cc.LayerColor.extend({
 
             }
         }
-        if(e==cc.KEY.right){
+        else if(e==cc.KEY.right){
            
                     
             this.character.direction=2;
@@ -163,7 +206,7 @@ var GameLayer = cc.LayerColor.extend({
             
             }
         }
-        if(e==cc.KEY.c){
+        else if(e==cc.KEY.c){
             
             if(this.click){
                 this.character.reMonster(this.mushroom);
@@ -180,9 +223,43 @@ var GameLayer = cc.LayerColor.extend({
             }
 
 
+        }
+        else if(e==49){
+            this.pressSkill=49;
+          this.character.useSkill=true; 
+           this.callSkill();
+          this.skill.reMonster(this.mushroom);
+        
+          
+        }
+         else if(e==50){
+            this.pressSkill=50;
+          this.character.useSkill=true; 
+           this.callSkill();
+          this.skill.reMonster(this.mushroom);
+        
+          
+        }
+         else if(e==51){
+            this.pressSkill=51;
+          this.character.useSkill=true; 
+           this.callSkill();
+          this.skill.reMonster(this.mushroom);
+        
+          
+        }
+         else if(e==52){
+            this.pressSkill=52;
+          this.character.useSkill=true; 
+           this.callSkill();
+          this.skill.reMonster(this.mushroom);
+        
+          
+        }
     }}
     },
     onKeyUp: function( e ) {
+      if(!this.character.useSkill){  
        
         if(this.character.change==false){    
 
@@ -194,13 +271,13 @@ var GameLayer = cc.LayerColor.extend({
                 console.log( 'Up: ' + e );
 
             }
-            if(e==cc.KEY.right){
+            else if(e==cc.KEY.right){
                 this.walk=false;
                 this.click=true;
                 this.character.Normal();
                 console.log( 'Up: ' + e );
             }
-            if(e==cc.KEY.c){
+            else if(e==cc.KEY.c){
                 this.character.sta_attack=false;
                 this.click=true;
                 this.character.Normal();
@@ -218,13 +295,13 @@ var GameLayer = cc.LayerColor.extend({
                 console.log( 'Up: ' + e );
 
             }
-            if(e==cc.KEY.right){
+            else if(e==cc.KEY.right){
                 this.walk=false;
                 this.click=true;
                 this.character.Evo();
                 console.log( 'Up: ' + e );
             }
-            if(e==cc.KEY.c){
+            else if(e==cc.KEY.c){
                  this.character.sta_attack=false;
                  this.click=true;
                  this.character.Evo();
@@ -234,7 +311,7 @@ var GameLayer = cc.LayerColor.extend({
 
     }
 
-    }}
+    }}}
 
 });
 
@@ -242,8 +319,9 @@ var StartScene = cc.Scene.extend({
     onEnter: function() {
         this._super();
         var layer = new GameLayer();
-        layer.init();
         var layer2 = new GameLayer2();
+        layer.init();
+        
         layer2.init(layer);
         this.addChild( layer );
         this.addChild( layer2 );

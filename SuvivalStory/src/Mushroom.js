@@ -124,9 +124,11 @@ var Mushroom = cc.Sprite.extend({
                     // this.stop();
                     // this.movingAction = this.createAnimationisHit();
                     // this.start();
-                    this.character.hp-=this.damage;
-                    this.hit=false;
-                    console.log("monster attack");
+                    if(this.character.hp>0){
+                        this.character.hp-=this.damage;
+                        this.hit=false;
+                        console.log("monster attack");
+                }
              }   
 
         }

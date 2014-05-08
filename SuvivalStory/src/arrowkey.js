@@ -9,12 +9,14 @@ var arrowkey = cc.Sprite.extend({
         this.y=y;
        	this.statusKey=null;
         this.successKey=false;
-        this.failKey=false;
+        //this.failKey=false;
+
        	this.setAnchorPoint(cc.p(0,0));
        
     },
     update:function(){
         this.updatePostion();
+        
     },
     
     updatePostion:function(){
