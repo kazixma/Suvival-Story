@@ -25,7 +25,8 @@ var swordrayskill_s_plist='images/swordrayskill.plist';
 var swordrayskill_s='images/swordrayskill.png';
 var thunderskill_s_plist='images/thunderskill.plist';
 var thunderskill_s='images/thunderskill.png';
-
+var Boss_s_plist='images/Boss.plist';
+var Boss_s='images/Boss.png';
 
 
 
@@ -47,7 +48,7 @@ var g_resources = [
     {src:spiritskill_s},
     {src:swordrayskill_s},
     {src:thunderskill_s},
-    //{src:ancestral_s},
+    {src:Boss_s},
 
 	
     //plist
@@ -62,7 +63,7 @@ var g_resources = [
     {src:spiritskill_s_plist},
     {src:swordrayskill_s_plist},
     {src:thunderskill_s_plist},
-    //{src:ancestral_s_plist},
+    {src:Boss_s_plist},
 	
     //fnt
 

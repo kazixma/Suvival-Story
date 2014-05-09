@@ -14,8 +14,8 @@ var Character = cc.Sprite.extend({
          this.movingAction = this.createAnimationStand();
         this.GameLayer=GameLayer;
         this.v=4;
-        this.hp=500;
-        this.mp=500;
+        this.hp=1500;
+        this.mp=1500;
         this.damage=1000;
         this.change=false;
         this.sta_attack=false;
@@ -102,10 +102,11 @@ var Character = cc.Sprite.extend({
     },
     attack:function(){
     
-     for(i=0;i<10;i++){
+     for(i=0;i<this.GameLayer.nummonster;i++){
         this.checkIntersect(this.mushroom[i].getRect(),i);
         
         }
+
 
     },
     checkIntersect:function(rect,i){
@@ -149,7 +150,7 @@ var Character = cc.Sprite.extend({
             // ));
             // this.mushroom[i].movingAction = this.mushroom[i].createAnimationisHit();
            // this.start();
-           // this.mushroom[i].hp=this.mushroom[i].hp-this.damage;
+            this.mushroom[i].hp=this.mushroom[i].hp-this.damage;
        // this.mushroom[i].reBack();
                
 
@@ -206,6 +207,40 @@ var Character = cc.Sprite.extend({
      	 
 		
     // },
+      createAnimationIceSwordSkill: function() {
+       // this.stopAllActions();
+        this.getSprite2();
+        var animFrames = [];
+        for (var i = 0; i <= 13; i++) {
+            var str = "effect_" + i +".png";
+            var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+            animFrames.push(frame);
+        }
+
+        var animation = cc.Animation.create(animFrames, 0.2);
+
+
+        return cc.Animate.create(animation);      
+             
+        
+    },
+    createAnimationSwordRaySkill: function() {
+       // this.stopAllActions();
+        this.getSprite1();
+        var animFrames = [];
+        for (var i = 0; i <= 20; i++) {
+            var str = "effect_" + i +".png";
+            var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+            animFrames.push(frame);
+        }
+
+        var animation = cc.Animation.create(animFrames, 0.2);
+
+
+        return cc.Animate.create(animation);      
+             
+        
+    },
     createAnimationEvo:function(){
         this.getSprite();
         var animFrames = [];
@@ -375,6 +410,12 @@ var Character = cc.Sprite.extend({
         
          
         
+    },
+      getSprite1:function(){
+        return cc.SpriteFrameCache.getInstance().addSpriteFrames(swordrayskill_s_plist,swordrayskill_s);
+    },
+     getSprite2:function(){
+        return cc.SpriteFrameCache.getInstance().addSpriteFrames(iceswordskill_s_plist,iceswordskill_s);
     },
     Evo:function(){
         this.stop();

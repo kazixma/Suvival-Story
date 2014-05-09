@@ -1,16 +1,16 @@
 var skill3 = cc.Sprite.extend({
-    ctor: function(x,y) {
+    ctor: function(x,y,GameLayer) {
         this._super();
        // this.initWithFile( 'images/stay_0.png' );
 
        	this.movingAction = null;
-        
+        this.GameLayer=GameLayer;
         this.x=x;
         this.y=y;
        	this.statusKey=null;
         this.successKey=false;
         //this.failKey=false;
-
+        this.damageSkill=5000;
        	this.setAnchorPoint(cc.p(0.5,0.5));
        
     },
@@ -235,7 +235,7 @@ var skill3 = cc.Sprite.extend({
     attack:function(){
     
     
-        for(i=0;i<10;i++){
+        for(i=0;i<this.GameLayer.nummonster;i++){
         this.checkIntersect(this.monster[i].getRect(),i);
         
         }
@@ -288,7 +288,7 @@ var skill3 = cc.Sprite.extend({
             // ));
             // this.mushroom[i].movingAction = this.mushroom[i].createAnimationisHit();
            // this.start();
-           // this.mushroom[i].hp=this.mushroom[i].hp-this.damage;
+            this.monster[i].hp=this.monster[i].hp-this.damageSkill*5;
        // this.mushroom[i].reBack();
                
 

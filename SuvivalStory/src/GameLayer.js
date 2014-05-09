@@ -10,7 +10,8 @@ var GameLayer = cc.LayerColor.extend({
         this.character = new Character(400,134,this);
         this.walk=false;
        // var nummonster=Math.floor(Math.random() * (20 - 5 + 5)) + 5;
-        this.nummonster =10;
+       this.nummonster =Math.floor(Math.random() * (40 - 5 + 5)) + 5;
+       //this.nummonster=2;
         this.mapleground.setPosition(new cc.Point(0,400));
         this.gamelayer2=new GameLayer2(this);
        // this.gamelayer2.restatus(this.character);
@@ -19,6 +20,8 @@ var GameLayer = cc.LayerColor.extend({
        // this.character.setPosition( new cc.Point( 400, 500 ) );
         //this.character.speed=5;
         //alert(this.character.speed)
+       // this.skill=new skill(this.character.x+50,this.character.y+120);
+       // this.skill2=new skill2(this.character.x+50,this.character.y+120);
         this.pressSkill=0;
         this.click=true;
         this.character.sta_attack=false;
@@ -30,13 +33,24 @@ var GameLayer = cc.LayerColor.extend({
         
         for(i=0;i<this.nummonster;i++){
             var posmonster=Math.floor(Math.random() * (3599 - 1 + 1)) + 1;
+            if(i!=this.nummonster-1){
             this.mushroom[i]=new Mushroom(posmonster,134);
             this.mushroom[i].setPosition(cc.p(posmonster,134));
             this.mushroom[i].scheduleUpdate();
             this.mushroom[i].reCharacter(this.character);
             this.addChild(this.mushroom[i]);
-        
+            }
+            else{
+              this.mushroom[i]=new Boss(2800,35);
+            this.mushroom[i].setPosition(cc.p(2800,35));
+            this.mushroom[i].scheduleUpdate();
+            this.mushroom[i].reCharacter(this.character);
+            this.addChild(this.mushroom[i]);
+
+            }
         }
+            
+
         this.character.reMonster(this.mushroom);
         //this.schedule(this.createMonster,1,Infinity,null);
         
@@ -49,6 +63,7 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild(this.character );
 
         this.character.scheduleUpdate();
+       
        
 
         //this.skill=[];
@@ -99,6 +114,28 @@ var GameLayer = cc.LayerColor.extend({
         this.monster.setPosition(cc.p(400,200));
         this.addChild(this.monster);
         this.monster.scheduleUpdate();
+
+    },
+    callSkill:function(){
+            this.skill=new skill3(this.character.x+50,this.character.y+120,this);
+            this.skill.setPosition(cc.p(this.skill.x,this.skill.y));
+            this.skill.scheduleUpdate();
+           
+           
+            
+            this.skill.reMonster(this.mushroom);
+            this.addChild(this.skill);
+
+    },
+    callSkill2:function(){
+            this.skill2=new skill2(this.character.x+50,this.character.y+120);
+            this.skill2.setPosition(cc.p(this.skill2.x,this.skill2.y));
+            this.skill2.scheduleUpdate();
+           
+           
+            
+            this.skill2.reMonster(this.mushroom);
+            this.addChild(this.skill2);
 
     },
     // callSkill1:function(){
@@ -211,18 +248,21 @@ var GameLayer = cc.LayerColor.extend({
         }
         else if(e==49){
 
-         // this.deleteAllSkill();              
+         //this.deleteAllSkill();
+
           this.character.useSkill=true;   
-        // this.callSkill1();
+           this.callSkill();
+         
           this.pressSkill=49; 
-          //this.skill.reMonster(this.mushroom);
+          
           
           
         }
         else if(e==50){
-          //  this.deleteAllSkill(); 
-          this.character.useSkill=true; 
-          // this.callSkill1();
+         // this.deleteAllSkill(); 
+          this.character.useSkill=true;
+            
+         //  this.callSkill2();
            this.pressSkill=50;
           //this.skill.reMonster(this.mushroom);
         
@@ -240,7 +280,7 @@ var GameLayer = cc.LayerColor.extend({
          else if(e==52){
             
           this.character.useSkill=true; 
-          // this.callSkill();
+          //this.callSkill();
           this.pressSkill=52;
          // this.skill.reMonster(this.mushroom);
         
@@ -388,14 +428,36 @@ var GameLayer = cc.LayerColor.extend({
 var StartScene = cc.Scene.extend({
     onEnter: function() {
         this._super();
-        var layer = new GameLayer();
+        this.layer = new GameLayer();
         var layer2 = new GameLayer2();
-        layer.init();
-        
-        layer2.init(layer);
-        this.addChild( layer );
+        this.layer.init();
+        this.temp=1;
+        layer2.init(this.layer);
+        this.addChild( this.layer );
         this.addChild( layer2 );
+        this.scheduleUpdate();
         
+    },
+    update:function(){
+      if(this.layer.character.hp<=0){
+          if(this.temp==1){
+            this.temp++;
+          var gameover=new GameOver(-350,-200);
+          this.addChild(gameover);
+          gameover.scheduleUpdate();
+        }
+
+        }
+      else if(this.layer.mushroom[this.layer.nummonster-1].hp<=0){
+          if(this.temp==1){
+            this.temp++;
+          var winner=new Winner(100,-100);
+          this.addChild(winner);
+          winner.scheduleUpdate();
+        }
+      }
+
+
     }
 
 });

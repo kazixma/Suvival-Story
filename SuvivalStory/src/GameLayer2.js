@@ -25,7 +25,9 @@ var GameLayer2 = cc.LayerColor.extend({
       this.ehpmp1.setPosition(cc.p(this.ehpmp1.x,this.ehpmp1.y));
       this.ehpmp2=new ehpmp(630,5);
       this.ehpmp2.setPosition(cc.p(this.ehpmp2.x,this.ehpmp2.y));
-      
+      this.keyBoard=new keyBoard(965,-3);
+      this.keyBoard.setPosition(cc.p(this.keyBoard.x,this.keyBoard.y));
+
         // draw.drawSegment( new cc.Point(100,20), new cc.Point(300,20),10, new cc.Color4F(0,0.635,0.909,1)); // sound 
         // draw.drawSegment( new cc.Point(100,50), new cc.Point(300,50),10, new cc.Color4F(0.423,0.184,0.517,1)); // writing
       //this.hp.setScaleX() ; 
@@ -42,22 +44,10 @@ var GameLayer2 = cc.LayerColor.extend({
       this.addChild(this.hp);
       this.addChild(this.ehpmp2);
       this.addChild(this.mp);
-       this.skill=new skill(this.character.x+50,this.character.y+120);
-            this.skill.setPosition(cc.p(this.skill.x,this.skill.y));
-            this.skill.scheduleUpdate();
-           
-           
-            
-            this.skill.reMonster(this.GameLayer1.mushroom);
-            this.addChild(this.skill);
-          this.skill2=new skill(this.character.x+50,this.character.y+120);
-            this.skill2.setPosition(cc.p(this.skill.x,this.skill.y));
-            this.skill2.scheduleUpdate();
-           
-           
-            
-            this.skill2.reMonster(this.GameLayer1.mushroom);
-            this.addChild(this.skill2);
+      this.addChild(this.keyBoard);
+      
+
+         
       
       this.setKeyboardEnabled( true );
 
@@ -68,11 +58,14 @@ var GameLayer2 = cc.LayerColor.extend({
     
    
     update:function(){
-      if(this.character.hp>0){
-        this.hp.setScaleX(this.character.hp/500);
+      if(this.character.hp>=0){
+        this.hp.setScaleX(this.character.hp/1500);
+      }
+       if(this.character.mp>=0){
+        this.mp.setScaleX(this.character.mp/1500);
       }
      // console.log(this.GameLayer1.pressSkill);
-
+     console.log(this.character.mp);
    },
     onKeyDown: function( e ) {
       console.log(e);
@@ -265,9 +258,10 @@ var GameLayer2 = cc.LayerColor.extend({
           this.character.useSkill=false;
          
            this.correct=true;
+          // this.addChild(this.skill);
            this.checkSkill();
-          
-          
+         
+          console.log("add");
          
 
       }
@@ -280,25 +274,68 @@ var GameLayer2 = cc.LayerColor.extend({
 
            if(this.GameLayer1.pressSkill==49){
               console.log("49");
-             // this.skill.movingAction=this.skill.createAnimationThunderSkill();
-              this.skill.runThunderSkill();
-            }
-            if(this.GameLayer1.pressSkill==50){
-            console.log("50");
-            // this.skill.movingAction=this.skill.createAnimationIceSwordSkill();
-              this.skill.runIceSwordSkill();
+              if(this.character.mp>=500){
+              this.GameLayer1.skill.runAncestral();
+              this.character.mp=this.character.mp-500;
 
+              }
+              //this.GameLayer1.skill2=null;
+             // this.skill.movingAction=this.skill.createAnimationThunderSkill();
+               //this.GameLayer1.skill.stop();
+              //this.GameLayer1.skill.movingAction=this.GameLayer1.skill.createAnimationThunderSkill();
+              //this.GameLayer1.skill.runAction(this.GameLayer1.skill.createAnimationThunderSkill());
+          
+               //this.GameLayer1.skill.start();
+
+              // this.GameLayer1.skill2.stopAllActions();
+              // this.GameLayer1.skill2=null;
+              // if(this.test3==1||this.GameLayer1.skill2.movingAction.isDone()){
+            //   this.GameLayer1.callSkill1();
+            //   this.test3++;
+            //   this.GameLayer1.skill.start();
+            // }
+              // if(this.GameLayer1.skill.test1){
+              //   console.log("ok");
+               // this.GameLayer1.skill=new skill(this.character.x+50,this.character.y+120); 
+             
+
+              // }
+              
             }
-            if(this.GameLayer1.pressSkill==51){
+            else if(this.GameLayer1.pressSkill==50){
+            console.log("50");
+             
+             
+           // this.GameLayer1.skill=null;
+            // this.GameLayer1.skill2.stop();
+            // this.GameLayer1.skill2.movingAction=this.GameLayer1.skill2.createAnimationIceSwordSkill();
+          // this.GameLayer1.skill2.runAction(this.GameLayer1.skill2.createAnimationIceSwordSkill());
+          // this.GameLayer1.skill2.start();
+           // this.GameLayer1.skill.stopAllActions();
+           //  this.GameLayer1.skill=null;
+            //   if(this.test3==1||this.GameLayer1.skill.movingAction.isDone()){
+            //   this.GameLayer1.callSkill2();
+            //   this.test3++;
+            //   this.GameLayer1.skill2.start();
+            // }
+             // if(this.GameLayer1.skill2.test2){
+             //    console.log("ok");
+            // this.GameLayer1.skill2=new skill2(this.character.x+50,this.character.y+120);
+
+             //  }
+            
+            }
+            else if(this.GameLayer1.pressSkill==51){
               
          console.log("51");
               
             }
-            if(this.GameLayer1.pressSkill==52){
+            else if(this.GameLayer1.pressSkill==52){
                
               console.log("52");
               
             }
+          //  this.removeChild(this.skill);
 
     },
     

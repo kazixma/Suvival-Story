@@ -31,7 +31,11 @@
         'src/skill5.js',  
         'src/skill6.js',  
         'src/skill7.js',  
-        'src/skill8.js',       //add your own files in order here
+        'src/skill8.js', 
+        'src/GameOver.js',
+        'src/keyBoard.js',
+        'src/Boss.js',
+        'src/Winner.js',      //add your own files in order here
         ]
     };
 
