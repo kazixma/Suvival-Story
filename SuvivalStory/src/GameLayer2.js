@@ -62,7 +62,7 @@ var GameLayer2 = cc.LayerColor.extend({
         this.hp.setScaleX(this.character.hp/1500);
       }
        if(this.character.mp>=0){
-        this.mp.setScaleX(this.character.mp/1500);
+        this.mp.setScaleX(this.character.mp/2500);
       }
      // console.log(this.GameLayer1.pressSkill);
      console.log(this.character.mp);

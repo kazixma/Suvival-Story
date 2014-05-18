@@ -313,7 +313,7 @@ var GameLayer = cc.LayerColor.extend({
             }
         }
         else if(e==cc.KEY.c){
-            
+            this.character.mp-=1;
             if(this.click){
                 this.character.reMonster(this.mushroom);
                 

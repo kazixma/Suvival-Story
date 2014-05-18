@@ -24,15 +24,9 @@
         'src/bgstat2.js',
         'src/ehpmp.js',
         'src/arrowkey.js',
-        'src/skill.js',
-        'src/skill2.js',  
+        
         'src/skill3.js',  
-        'src/skill4.js',  
-        'src/skill5.js',  
-        'src/skill6.js',  
-        'src/skill7.js',  
-        'src/skill8.js', 
-        'src/GameOver.js',
+        
         'src/keyBoard.js',
         'src/Boss.js',
         'src/Winner.js',      //add your own files in order here
