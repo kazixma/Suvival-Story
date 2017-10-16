@@ -6,6 +6,7 @@ Kazixma has a small dick
 
 ## Stacks
 * Cocos2d
+* Javascript
 
 ## Usage
 
